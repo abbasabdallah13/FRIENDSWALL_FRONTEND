@@ -17,7 +17,6 @@ import PersonAdd from '@material-ui/icons/PersonAdd';
 import Home from '@material-ui/icons/Home';
 
 import { CLEAR_FRIEND_STATE, CLEAR_STATE } from "../../constants/actionTypes";
-import { getUserInfo } from "../../actions/users";
 import { getPostsPerPage } from "../../actions/posts";
 
 import UserRequest from "./UserRequests/UserRequest";
@@ -26,19 +25,18 @@ import memories from '../../assets/memories.png'
 
 import './index.css'
 
-
-  
+ 
 const Navbar = ({setBannerOrFriends}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
     const navbarModalRef = useRef(null);
 
-    const localStorageUser = JSON.parse(localStorage.getItem('user'))?.result || {};
     const user = useSelector(state => state.user.loggedUser);
 
     const [friendRequestModal, setFriendRequestModal] = useState(false);
     const [openNavbarModal, setOpenNavbarModal] = useState(false);
+    const [localStorageUser, setLocalStorageUser] = useState({})
 
     function useOutsideAlerter(ref) {
         useEffect(() => {
@@ -54,25 +52,10 @@ const Navbar = ({setBannerOrFriends}) => {
           };
         }, [ref]);
       }
-      useOutsideAlerter(navbarModalRef);
-
-    
-    
-    const logout = () => {
-        dispatch({ type: 'LOGOUT'})
-        dispatch({type: CLEAR_STATE})
-        dispatch(getPostsPerPage(1))
-        setFriendRequestModal(false);
-        setOpenNavbarModal(false);
-        navigate('/')
-    }
-
-    useEffect(() => {
-        dispatch(getUserInfo(localStorageUser._id))
-    }, []);
-    
+      useOutsideAlerter(navbarModalRef);    
     
     useEffect(() => {
+        console.log(user);
         const token = JSON.parse(localStorage.getItem('user'))?.token;
         if(token){
             try {
@@ -82,6 +65,12 @@ const Navbar = ({setBannerOrFriends}) => {
                 console.log(error.message)
             }
         }
+
+    if(localStorage.getItem('user')){
+        setLocalStorageUser(JSON.parse(localStorage.getItem('user'))?.result)
+    }else{
+        setLocalStorageUser({})
+    }
         
     }, [location]);
     
@@ -111,6 +100,15 @@ const Navbar = ({setBannerOrFriends}) => {
         setOpenNavbarModal(false)
         dispatch({type: CLEAR_FRIEND_STATE})
         setBannerOrFriends('friends');
+    }
+
+    const logout = () => {
+        dispatch({ type: 'LOGOUT'})
+        dispatch({type: CLEAR_STATE})
+        dispatch(getPostsPerPage(1))
+        setFriendRequestModal(false);
+        setOpenNavbarModal(false);
+        navigate('/')
     }
     
   return (

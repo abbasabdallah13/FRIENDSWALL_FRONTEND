@@ -64,8 +64,7 @@ const Auth = () => {
         const decoded = createOrGetUser(res);
         const { family_name, given_name, picture , email, sub } = await decoded;
         try {
-            dispatch(googleSignInAction({ googleResponseObject: {family_name, given_name, picture , email } }))
-            navigate('/');
+            dispatch(googleSignInAction({ googleResponseObject: {family_name, given_name, picture , email } }, navigate))
         } catch (error) {
             console.log(error)
         }
