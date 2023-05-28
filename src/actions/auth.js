@@ -4,17 +4,13 @@ import { AUTH, GET_USER_INFO } from '../constants/actionTypes';
 export const signIn = (formData, navigate) => async(dispatch) => {
     try {
         const { data } = await api.signIn(formData)
-        if(data.message){
-            dispatch({ type: AUTH, error: data.message})
-            window.location.reload();
-        }else{
-            dispatch({ type: AUTH,  payload: data[0]})
-            dispatch({type: GET_USER_INFO, payload: data[1]})
-            navigate('/')
-        }
+        dispatch({ type: AUTH,  payload: data[0]})
+        dispatch({type: GET_USER_INFO, payload: data[1]})
+        navigate('/')
 
     } catch (error) {
-        console.log(error.message)
+        dispatch({ type: AUTH, error: error['response']['data']['message']})
+        window.location.reload();
     }
 }
 export const signUp = (formData, navigate) => async(dispatch) => {
