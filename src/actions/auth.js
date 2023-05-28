@@ -5,7 +5,7 @@ export const signIn = (formData, navigate) => async(dispatch) => {
     try {
         const { data } = await api.signIn(formData)
         if(data.message){
-            dispatch({ type: AUTH, error: error['response']['data']['message']})
+            dispatch({ type: AUTH, error: data.message})
             window.location.reload();
         }else{
             dispatch({ type: AUTH,  payload: data[0]})
