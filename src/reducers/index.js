@@ -1,7 +1,11 @@
 import { combineReducers } from "redux";
 
-import posts from './posts'
+import postsReducer from './posts'
+import auth from './auth'
+import userReducer from "./user";
 
 export const reducers = combineReducers({
-    posts, // it is posts:posts but because the key and the value are the same, we can put only posts
+    posts: postsReducer, // it is posts:posts but because the key and the value are the same, we can put only posts
+    auth,
+    user: userReducer
 })

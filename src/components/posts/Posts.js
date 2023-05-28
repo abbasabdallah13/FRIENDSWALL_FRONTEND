@@ -1,20 +1,29 @@
 import React from "react";
-import Post from "./post/Post";
-import useStyles from './styles'
+
 import { useSelector } from "react-redux";
+
 import { Grid, CircularProgress } from "@material-ui/core"
 
+import Post from "./post/Post";
 
-const Posts = ({setCurrentId}) => {
-    const classes = useStyles();
-    const posts = useSelector((state)=>state.posts);
+
+const Posts = ({setScrollToTopButton, setCurrentId, setCreateMemoryForm}) => {
+    const { users, posts, isLoading } = useSelector((state)=>state.posts);
+
+    if(!posts.length && !isLoading && users.length === 0 ) return <p>No posts found</p>
+
+    if(users === 'No Users Found!') return <p>No Users Found!</p>
+
   return (
-        !posts.length ? <CircularProgress /> : (
-        <Grid className={classes.container} container alignItems='stretch' spacing={3}>
+       isLoading ? 
+        <div style={{ display: 'flex', justifyContent:'center', marginTop:'10rem'}}>
+            <CircularProgress  />
+        </div> : (
+        <Grid container alignItems='stretch' spacing={3}>
             {
                 posts.map(post => (
-                    <Grid item key={post._id} xs={12} sm={6}>
-                        <Post post={post} setCurrentId={setCurrentId} />
+                    <Grid item key={post._id} xs={12} sm={6} md={6} lg={3}>
+                        <Post setScrollToTopButton={setScrollToTopButton} setCreateMemoryForm={setCreateMemoryForm} post={post} setCurrentId={setCurrentId} />
                     </Grid>
                 ))
             }

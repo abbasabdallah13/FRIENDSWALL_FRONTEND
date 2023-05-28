@@ -1,0 +1,186 @@
+.oneStar{
+    padding: 0 1rem;
+}
+
+.one{
+    display: flex;
+    justify-content: space-between;
+}
+
+.two{
+    display: flex;
+    flex-direction: column;
+    background-color: #f6f8e7;
+    border-radius: 15px;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.user-banner-component{
+    width: 20%;
+}
+
+.three{
+    display: flex;
+    flex-direction: column;
+    width: 79%;
+}
+
+.five{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.six{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.seven{
+    display: flex;
+    flex-direction: column;
+    order:1;
+}
+
+.eight{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    order:2;
+}
+
+.nine{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.profile-pic-change{
+    border-radius: 50% ;
+    width: min(60vw,240px);
+    height: min(60vw,240px);
+}
+
+.profile-pic-change-container{
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.banner-name{
+    font-size: 1.8rem;
+}
+
+.bio{
+    position: relative;
+    bottom: 1.8rem;
+    font-size: 1rem;
+}
+
+
+@media screen and (max-width: 480px){
+    .oneStar{
+        padding: 0;
+    }
+    .user-banner-component{
+        display: none;
+    }
+
+    .friends-banner-component{
+        display: block;
+        width: 100%;
+    }
+    .three{
+        width: 100%;
+    }
+    .four {
+        display: none;
+    }
+    .six{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .seven{
+        order: 2;
+    }
+    .eight{
+        order:1;
+        width: 100%;
+    }
+    .profile-pic-change-container{
+        max-width: 80%;
+    }
+    
+}
+
+@media screen and (min-width: 480px){
+    .friends-banner-component{
+        display: block !important;
+        width: 50%;
+    }
+
+    .user-banner-component{
+        display: none;
+    }
+}
+
+@media screen and (min-width:600px) {
+    .friends-banner-component{
+        width: min(100%, 220px) !important;
+    }
+}
+
+@media screen and (min-width: 480px) and (max-width: 768px){
+    .oneStar{
+        padding: 0;
+    }
+    .user-banner-component.friends-banner-component{
+        display: none;
+    }
+
+    .three{
+        width: 100%;
+    }
+    .six{
+        flex-direction: column;
+    }
+    .seven{
+        order: 2;
+    }
+    .eight{
+        order:1;
+        width: 100%;
+    }
+    .profile-pic-change-container{
+        max-width: 50%;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .banner-name{
+        font-size: 1rem;
+    }
+    .bio{
+        font-size: 0.8rem;
+    }
+    .three{
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 1024px){
+    .user-banner-component{
+        display: flex;
+    }
+   
+}

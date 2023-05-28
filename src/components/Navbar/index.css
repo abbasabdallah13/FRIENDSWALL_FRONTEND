@@ -1,0 +1,117 @@
+.appBar{
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.3rem 0;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    padding: 0.3rem 1rem;
+    cursor: pointer;
+}
+
+.logo-heading{
+    color: rgba(0,183,255, 1);
+    text-decoration: none;
+    font-size: 2rem !important;
+}
+
+.logo-image{
+    margin-left: 15px;
+    width: min(40%,30px);
+    margin-left: 5px;
+}
+
+.navbar-username{
+    display: block;
+    font-size: 1rem;
+    text-align: center;
+    width: 100%;
+    border-bottom: 1px solid black;
+    padding:0.5rem 0;
+}
+
+.navbar-user-pic{
+    width: 50px; 
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 1rem;
+}
+
+.navbar-toolbar{
+    display: flex;
+    justify-content: end;
+}
+
+.navbar-modal{
+    position:absolute;
+    right:0;
+    bottom:-19.3rem;
+    border:1px solid black;
+    background-color:white;
+    padding:0.3rem 1rem;
+    border-radius:7px;
+    z-index:20;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.sign-in-btn{
+height: 2rem;
+width: 5rem;
+font-size: 0.7rem !important;
+}
+.notifications-button{
+    border-radius: 50%;
+    border: 1px solid black;
+    height: 2rem;
+    width: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor:pointer;
+}
+
+.notifications-button:hover{
+    background-color:#e0e0e0;
+}
+
+.navbar-button{
+    width:100%;
+    display:flex;
+    justify-content:start;
+    align-items:center;
+    font-size:1rem;
+}
+
+.navbar-button-span{
+    border-radius:50%;
+    border:1px solid black;
+    padding:0.3rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-right:1rem;
+}
+
+@media screen and (max-width: 480px) {
+    .logo-heading{
+        font-size: 1rem !important;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .logo-heading{
+        display: none;
+    }
+    .logo-image{
+        width:30px;
+    }
+}
