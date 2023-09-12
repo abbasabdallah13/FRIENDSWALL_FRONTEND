@@ -9,7 +9,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google'
 import thunk from 'redux-thunk'
 import { BrowserRouter } from 'react-router-dom'
 import { GlobalVariablesProvider } from '../context/globalVariables'
-import { Container, ThemeProvider, createMuiTheme } from '@mui/material'
+import { Container, ThemeProvider, createTheme } from '@mui/material'
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
 // const store = configureStore({
@@ -21,7 +21,7 @@ const store = createStore(reducers, compose(applyMiddleware(thunk)))
 //   })],
 // })
 
-const theme = createMuiTheme()
+const theme = createTheme()
 
 export default function RootLayout({ children }) {
   return (
