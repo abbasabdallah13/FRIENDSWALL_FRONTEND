@@ -1,0 +1,9 @@
+.friend-paginate{
+    width: 50%;
+}
+
+@media screen and (max-width: 480px){
+    .friend-paginate{
+        width: 100%;
+    }
+}

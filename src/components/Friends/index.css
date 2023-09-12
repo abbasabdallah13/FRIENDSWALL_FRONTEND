@@ -1,0 +1,69 @@
+.friend-button{
+    transition:0.5s;
+    cursor:pointer;
+    padding:1rem 1rem;
+    display: flex;
+    align-items:center;
+    gap:1rem;
+    border-radius:5px;
+    width: 100%;
+}
+
+.friend-button:hover{
+    background-color: #e8e8e8;
+}
+
+.click-friends-banner{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background-color:#c8c8c8;
+    border-radius: 8px;
+    height:100%;
+    padding: 0 25px;
+}
+
+.banner-or-friends-container{
+    height:87vh;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+
+
+@media screen and (max-width: 480px){
+    .click-friends-banner{
+        display: none !important;
+    }
+
+    .banner-or-friends-container{
+        height:100%;
+    }
+
+    .friends-posts{
+        margin-top:1rem;
+    }
+}
+
+@media screen and (min-width: 480px) and (max-width: 600px) {
+
+    .banner-or-friends-container{
+        height: 100%;
+    }
+
+    .friends-posts{
+        margin-top:1rem;
+    }
+}
+
+@media screen and (min-width: 600px){
+    .banner-or-friends-container{
+        align-items: start;
+        height: 100%;
+
+    }
+}

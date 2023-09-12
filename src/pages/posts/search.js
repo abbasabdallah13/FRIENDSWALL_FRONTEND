@@ -10,18 +10,18 @@ import { useLocation } from 'react-router-dom'
 
 import { navigate } from '@reach/router'
 
-import { getPosts, getPostsPerPage, searchAction } from '../actions/posts'
+import { getPosts, getPostsPerPage, searchAction } from '../../actions/posts'
 
-import Posts from "../components/posts/Posts";
-import Form from "../components/form/Form";
-import Paginate from '../components/Pagination'
-import UserBannerContainer from "../components/userBanner/UserBannerContainer";
-import ScrollToTop from "../components/ScrollToTop/ScrollToTop";
+import Posts from "../../components/posts/Posts";
+import Form from "../../components/form/Form";
+import Paginate from '../../components/Pagination'
+import UserBannerContainer from "../../components/userBanner/UserBannerContainer";
+import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
 
-import useStyles from '../styles'
+import useStyles from '../../styles'
 
-import noPostsFound from '../assets/nopostsfound.png'
-import GlobalVariablesContext from "../context/globalVariables";
+import noPostsFound from '../../assets/nopostsfound.png'
+import GlobalVariablesContext from "../../context/globalVariables";
 
 
 function useQuery() {
@@ -51,7 +51,7 @@ const Home = () => {
     const page = query.get('page') || 1; 
     
     useEffect(() => {
-      console.log(page)
+        console.log(location)
       dispatch(getPosts())
     }, [page]);
     
