@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useDispatch } from "react-redux";
 
@@ -12,8 +12,11 @@ import { likePost } from "../../../actions/posts";
 
 const LikeButton = ({post}) => {
     const dispatch = useDispatch();
+    let user;
 
-    const user = JSON.parse(localStorage.getItem('user'));
+    useEffect(()=>{
+        user = JSON.parse(localStorage.getItem('user'));
+    },[])
 
     const likePost = (e,id) => {
         e.stopPropagation()

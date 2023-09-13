@@ -19,8 +19,11 @@ import LikeButton from "./LikeButton";
 
 const Post = ({post, setCurrentId, setCreateMemoryForm}) => {
   const dispatch = useDispatch();
+  let user;
 
-  const user = JSON.parse(localStorage.getItem('user'))
+  useEffect(()=>{
+    user = JSON.parse(localStorage.getItem('user'))
+  },[])
 
   const [confirmDeleteModal, setConfirmDeleteModal] = useState(false);
  

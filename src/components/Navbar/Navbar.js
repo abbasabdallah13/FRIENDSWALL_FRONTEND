@@ -58,6 +58,7 @@ const Navbar = () => {
       useOutsideAlerter(navbarModalRef);    
     
     useEffect(() => {
+
         const token = JSON.parse(localStorage.getItem('user'))?.token;
         if(token){
             try {

@@ -21,6 +21,7 @@ import GlobalVariablesContext from "../../context/globalVariables.js";
 
 
 const PostDetails = () => {
+  let post, user;
   const dispatch = useDispatch();
   const location = useLocation()
 
@@ -28,8 +29,6 @@ const PostDetails = () => {
   let regex2= /\//
   const id = location.pathname.replace(regex,'').replace(regex2, '')
   
-  const user = JSON.parse(localStorage.getItem('user'))
-  const post = JSON.parse(localStorage.getItem('openedPost'))
 
   const { allPosts, isLoading } = useSelector( state => state.posts )
   const { scrollToTopButton, setScrollToTopButton, currentId, setCurrentId } = useContext(GlobalVariablesContext)
@@ -42,6 +41,11 @@ const PostDetails = () => {
   const anywhereClick = useRef(null);
   
   const postCreator = post?.creator === user?.result?._id;
+
+  useEffect(()=>{
+    user = JSON.parse(localStorage.getItem('user'))
+    post = JSON.parse(localStorage.getItem('openedPost'))
+  }, [])
       
   useEffect(() => {
     dispatch(getPost(id))
@@ -62,7 +66,6 @@ const PostDetails = () => {
   }, [currentId]);
 
   useEffect(() => {
-    console.log(location)
     window.addEventListener('scroll', () => {
       if(window.scrollY > 100){
         setScrollToTopButton(true);

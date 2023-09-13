@@ -17,7 +17,11 @@ import { getCountryFlag } from "../../../utils/utils";
 
 const Banner = ({user, userInfo, addFriendBtn, component, setBannerOrFriends,style, className}) => {
     const loggedUser = useSelector(state => state.user.loggedUser);
-    const localStorageUser = JSON.parse(localStorage.getItem('user'));
+    let localStorageUser;  
+    
+    useEffect(()=>{
+      localStorageUser = JSON.parse(localStorage.getItem('user'));
+    },[])
 
     const dispatch = useDispatch();
 

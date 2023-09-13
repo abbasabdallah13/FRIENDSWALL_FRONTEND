@@ -25,7 +25,11 @@ const Auth = () => {
         country: ''
     }
 
-    const user = JSON.parse(localStorage.getItem('user'));
+    let user;
+
+    useEffect(()=>{
+        user = JSON.parse(localStorage.getItem('user'));
+    },[])
 
     const dispatch = useDispatch()
 
