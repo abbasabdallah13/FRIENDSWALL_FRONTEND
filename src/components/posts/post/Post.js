@@ -82,7 +82,7 @@ const Post = ({post, setCurrentId, setCreateMemoryForm}) => {
             <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography> 
           </div>
           <div style={{display: 'flex', justifyContent: 'space-between', margin: '5px'}}>
-            <Typography variant="body2" color="textSecondary">{post.tags.map(tag => `#${tag} `)}</Typography>
+            <Typography variant="body2" color="textSecondary">{post.tags.map(tag => `#${tag} `).join(' ').slice(0,25)}</Typography>
           </div>
           <Typography sx={{padding: '0 16px'}} variant="h5" gutterBottom>{post.title}</Typography>
           <CardContent>

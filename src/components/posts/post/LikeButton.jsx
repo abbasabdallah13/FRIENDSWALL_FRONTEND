@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useDispatch } from "react-redux";
 
@@ -11,28 +11,41 @@ import { likePost } from "../../../actions/posts";
 
 
 const LikeButton = ({post}) => {
+    const [likeMsg, setLikeMsg] = useState('')
+    const [disabled, setDisabled] = useState(true)
     const dispatch = useDispatch();
     let user;
 
     useEffect(()=>{
         user = JSON.parse(localStorage.getItem('user'));
-    },[])
+        if(user?.result._id) setDisabled(false)
+        if(post?.likes?.indexOf(user?.result?._id || user?.result?.googleId) === -1){
+            setLikeMsg('Like')
+        }else{
+            setLikeMsg('Unlike')
+        }
+    },[post])
 
-    const likePost = (e,id) => {
-        e.stopPropagation()
-        dispatch(likePost(id))
+
+    const likePostFunc = (event) => {
+        event.stopPropagation()
+        dispatch(likePost(post?._id))
     }
-  return (
-    <Button size="small" color="primary" disabled={!user?.result}  onClick={(e) => likePost(e,post?._id)}>
+    
+    if (!disabled) return (
+    <Button size="small" color="primary" onClick={likePostFunc}>
         {
-            post?.likes?.find(userId => userId === (user?.result?.googleId || user?.result?._id))
-            ? (
+            
+            (
             <>
-                <ThumbUpAltIcon fontSize="small" /> &nbsp; {post?.likes?.length} Unlike
-            </>
-            ) : (
-            <>
-                <ThumbUpAltOutlined fontSize='small' /> &nbsp; {post?.likes?.length} Like
+                { 
+                    likeMsg === 'Unlike' ? 
+                    <ThumbUpAltIcon fontSize="small" /> :
+                    <ThumbUpAltOutlined fontSize="small" />
+                }
+                &nbsp; 
+                {post?.likes?.length}&nbsp;
+                { likeMsg }
             </>
             )
         }
