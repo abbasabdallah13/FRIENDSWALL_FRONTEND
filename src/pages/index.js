@@ -6,9 +6,9 @@ import Cancel from '@mui/icons-material/CancelOutlined'
 
 import { useDispatch, useSelector } from "react-redux"
 
-import { useLocation } from 'react-router-dom'
+import { navigate,useLocation } from '@reach/router'
 
-import { navigate } from '@reach/router'
+import queryString from 'query-string'
 
 import { getPosts, getPostsPerPage, searchAction } from '../actions/posts'
 
@@ -22,12 +22,6 @@ import ScrollToTop from "../components/ScrollToTop/ScrollToTop";
 import noPostsFound from '../assets/nopostsfound.png'
 import GlobalVariablesContext from "../context/globalVariables";
 
-
-function useQuery() {
-  return new URLSearchParams(useLocation().search) // 1- this is to know on which page we are currently 
-  //on and what search term are we looking for
-}
-
 const Home = () => {
 
     const [userSearch, setUserSearch] = useState('');
@@ -40,14 +34,13 @@ const Home = () => {
     
     const {currentId, setCurrentId, scrollToTopButton, setScrollToTopButton} = useContext(GlobalVariablesContext)
     
-    const query = useQuery();   
     const dispatch = useDispatch();
     const location = useLocation();
     
     const { users, posts, isLoading } = useSelector(state => state.posts)
     
-    const page = query.get('page') || 1; 
-    
+    const page = queryString.parse(location.search).page || 1; 
+
     useEffect(() => {
       dispatch(getPosts())
     }, [page]);

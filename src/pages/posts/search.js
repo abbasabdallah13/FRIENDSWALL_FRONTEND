@@ -6,9 +6,7 @@ import Cancel from '@mui/icons-material/CancelOutlined'
 
 import { useDispatch, useSelector } from "react-redux"
 
-import { useLocation } from 'react-router-dom'
-
-import { navigate } from '@reach/router'
+import { navigate, useLocation } from '@reach/router'
 
 import { getPosts, getPostsPerPage, searchAction } from '../../actions/posts'
 

@@ -7,7 +7,7 @@ import '../index.css'
 import Navbar from './Navbar/Navbar'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import thunk from 'redux-thunk'
-import { BrowserRouter } from 'react-router-dom'
+import { LocationProvider } from '@reach/router'
 import { GlobalVariablesProvider } from '../context/globalVariables'
 import { Container, ThemeProvider, createTheme } from '@mui/material'
 
@@ -26,7 +26,7 @@ const theme = createTheme()
 export default function RootLayout({ children }) {
   return (
     <>
-      <BrowserRouter>
+      <LocationProvider>
         <Provider store={store}>
           <GoogleOAuthProvider clientId="172814880951-g88h6lvoupkcgore600n9qt83oilascb.apps.googleusercontent.com">
             <GlobalVariablesProvider>
@@ -39,7 +39,7 @@ export default function RootLayout({ children }) {
             </GlobalVariablesProvider>
           </GoogleOAuthProvider>
         </Provider>
-      </BrowserRouter>
+      </LocationProvider>
     </>
   )
 }

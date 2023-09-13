@@ -4,9 +4,7 @@ import { Paper, Button } from '@mui/material';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useParams } from 'react-router-dom';
-
-import { navigate } from '@reach/router';
+import { navigate, useLocation } from '@reach/router';
 
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz"
 import Cancel from "@mui/icons-material/Cancel"
@@ -23,9 +21,13 @@ import GlobalVariablesContext from "../../context/globalVariables.js";
 
 
 const PostDetails = () => {
-  const { id } = useParams();
   const dispatch = useDispatch();
- 
+  const location = useLocation()
+
+  let regex= /\/posts\//
+  let regex2= /\//
+  const id = location.pathname.replace(regex,'').replace(regex2, '')
+  
   const user = JSON.parse(localStorage.getItem('user'))
   const post = JSON.parse(localStorage.getItem('openedPost'))
 
@@ -60,6 +62,7 @@ const PostDetails = () => {
   }, [currentId]);
 
   useEffect(() => {
+    console.log(location)
     window.addEventListener('scroll', () => {
       if(window.scrollY > 100){
         setScrollToTopButton(true);

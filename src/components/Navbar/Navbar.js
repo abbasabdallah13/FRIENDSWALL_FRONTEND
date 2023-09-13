@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 
-import { Link, useLocation } from 'react-router-dom'
-import { navigate } from '@reach/router'
+import { navigate, useLocation } from '@reach/router'
 
 import decode from 'jwt-decode';
 

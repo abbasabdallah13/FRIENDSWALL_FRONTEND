@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { useParams } from "react-router-dom";
+import { useLocation } from "@reach/router";
 
 import FileBase from "react-file-base64"
 
@@ -26,10 +26,12 @@ import Banner from "../../components/userBanner/Banner/Banner.jsx";
 import testBanner from "../../assets/testbanner.png";
 
 
-const UserDetails = () => {
-  const { id } = useParams();
+const UserDetails = () => {  
+  const location = useLocation();
   const dispatch = useDispatch()
   
+ 
+
   let user = useSelector( state => state.user.loggedUser )
   const { isLoading } = useSelector ( state => state.posts )
   
@@ -42,9 +44,13 @@ const UserDetails = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('Fields cannot be empty!');
   
+  let regex= /\/user\//
+  let regex2= /\//
+  const id = location.pathname.replace(regex,'').replace(regex2,''); 
   
 
   useEffect(() => {
+    console.log(id)
     const obj1Props = Object.keys(user);
     const obj2Props = Object.keys(userInfo);
     for(let i=0;i<obj1Props.length;i++){
@@ -65,6 +71,7 @@ const UserDetails = () => {
     setUserInfo({})
     dispatch(getUserInfo(id))
     setUserInfo(user)
+    console.log(location)
   }, [id]);
 
   useEffect(() => {
