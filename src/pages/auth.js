@@ -11,7 +11,6 @@ import { navigate } from '@reach/router'
 
 import { googleSignInAction, signIn, signUp } from '../actions/auth'
 import Icon from '../assets/icon'
-import useStyles from '../styles'
 import Input from '../components/Input'
 import { createOrGetUser } from "../utils/utils";
 import CountrySelect from "../components/CountrySelect"
@@ -29,7 +28,6 @@ const Auth = () => {
     const user = JSON.parse(localStorage.getItem('user'));
 
     const dispatch = useDispatch()
-    const classes = useStyles();
 
     const {loginError, registerError} = useSelector(state => state.auth)
     
@@ -81,7 +79,7 @@ const Auth = () => {
   
   return (
     <Container component="main" maxWidth="xs">
-        <Paper className={classes.paper} elevation={3}>
+        <Paper sx={{marginTop: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10px'}} elevation={3}>
             {
                 loading ? (
                     <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
@@ -89,7 +87,7 @@ const Auth = () => {
                     </div> 
                     ) : (
                     <>
-                        <Avatar className={classes.avatar}>
+                        <Avatar sx={{margin: '5px', backgroundColor: ''}}>
                             <LockOutlinedIcon />
                         </Avatar>
                         <Typography variant='h5'>{isSignUp ? 'Sign Up' : 'Sign In'}</Typography>
@@ -98,7 +96,7 @@ const Auth = () => {
                             <p style={{color: 'red', fontFamily: 'monospace', textTransform: 'lowercase', textAlign: 'left'}}>{registerError}</p> :
                             <p style={{color: 'red', fontFamily: 'monospace', textTransform: 'lowercase', textAlign: 'left'}}>{loginError}</p>
                         }
-                        <form className={classes.form} onSubmit={handleSubmit}>
+                        <form sx={{width: '100%', marginTop: '5px',}} onSubmit={handleSubmit}>
                             <Grid style={{display:'flex', flexDirection:'column'}} spacing={2}>
                                 {
                                     isSignUp && (
@@ -122,7 +120,7 @@ const Auth = () => {
                                 fullWidth
                                 variant='contained'
                                 color='primary'
-                                className={classes.submit}
+                                sx={{margin: '10px 5px 5px'}}
                             >
                                 { 
                                     isSignUp ? 'Sign Up' : 'Sign In'
@@ -132,7 +130,7 @@ const Auth = () => {
                                 <GoogleLogin 
                                     render={(renderProps) => (
                                         <Button 
-                                            className={classes.googleButton} 
+                                            sx={{marginBottom: '5px'}}
                                             color='primary' 
                                             fullWidth 
                                             onClick={renderProps.onClick} 

@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 
-import { Container, Grow, Grid, AppBar, TextField, Button, CircularProgress } from '@mui/material'
+import { Container, Grow, Grid, AppBar, TextField, Button, CircularProgress, Box } from '@mui/material'
 import ArrowDropDownCircle from '@mui/icons-material/ArrowDropDownCircle'
 import Cancel from '@mui/icons-material/CancelOutlined'
 
@@ -18,7 +18,6 @@ import Paginate from '../components/Pagination'
 import UserBannerContainer from "../components/userBanner/UserBannerContainer";
 import ScrollToTop from "../components/ScrollToTop/ScrollToTop";
 
-import useStyles from '../styles'
 
 import noPostsFound from '../assets/nopostsfound.png'
 import GlobalVariablesContext from "../context/globalVariables";
@@ -42,7 +41,6 @@ const Home = () => {
     const {currentId, setCurrentId, scrollToTopButton, setScrollToTopButton} = useContext(GlobalVariablesContext)
     
     const query = useQuery();   
-    const classes = useStyles();
     const dispatch = useDispatch();
     const location = useLocation();
     
@@ -51,7 +49,6 @@ const Home = () => {
     const page = query.get('page') || 1; 
     
     useEffect(() => {
-      console.log(page)
       dispatch(getPosts())
     }, [page]);
     
@@ -126,7 +123,7 @@ const Home = () => {
           }
     <Grow in>
       <Container maxWidth='xl'>
-            <Grid className={classes.gridContainer} container justifyContent="space-between" alignItems="stretch" spacing={3}>
+            <Grid sx={{flexDirection: {xs: 'column-reverse', md: 'row'}}} container justifyContent="space-between" alignItems="stretch" spacing={3}>
               {
                 isLoading ? (
                   <Grid item xs={12} md={9} >
@@ -166,7 +163,7 @@ const Home = () => {
             
                 {
                   openSearch && (
-                    <AppBar className={classes.appBarSearch} position="static" color='inherit'>
+                    <AppBar sx={{borderRadius: 4, marginBottom: '1rem', display: 'flex', padding: '16px'}} position="static" color='inherit'>
                     <TextField 
                         style={{backgroundColor: postSearch || tags.length > 0 ? '#d8d8d8' : '#fff'}}
                         disabled={postSearch.length || tags.length > 0}
@@ -201,7 +198,7 @@ const Home = () => {
                       /> */}
                       <div style={{display:'flex', width: '100%', justifyContent:'space-around'}}>
                         <Button onClick={clear} style={{backgroundColor:'red', color:'white'}} variant='contained'>Clear</Button>
-                        <Button className={classes.searchButton} onClick={search} color='primary' variant='contained'>Search</Button>
+                        <Button onClick={search} color='primary' variant='contained'>Search</Button>
                       </div>
                     </AppBar>
                   )

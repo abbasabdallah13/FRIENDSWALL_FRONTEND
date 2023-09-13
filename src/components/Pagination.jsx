@@ -13,10 +13,8 @@ import PaginationItem from "@mui/material/PaginationItem";
 import { getPostsPerPage } from "../actions/posts";
 import { getFriendDetailsAction } from "../actions/users";
 
-import useStyles from '../styles'
 
 const Paginate = ({ friendId, page, setPage, component, bannerOrFriends }) => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   
   const { numberOfPages } = useSelector(state => state.posts);
@@ -37,7 +35,6 @@ const Paginate = ({ friendId, page, setPage, component, bannerOrFriends }) => {
     <Paper elevation={6} style={{padding:'0.5rem', marginTop:'2rem', backgroundColor:'#f6f8e7'}}>
     <div>
        <Pagination
-        classes={{ ul: classes.ul }}
         count={numberOfPages} //total number of pages
         page={Number(page) || 1}  //current page
         variant="outlined"
