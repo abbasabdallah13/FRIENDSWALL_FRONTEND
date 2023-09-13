@@ -73,15 +73,6 @@ const Home = () => {
       }
     }
 
-    const handleAdd = (tag) => {
-      setTags([...tags, tag])
-      setUserSearch('');
-    }
-    
-    const handleDelete = (tagToDelete) => {
-      setTags(tags.filter(tag => tag !== tagToDelete))
-    }
-
     const userSearchTrim = (e) => {
       setUserSearch(e.target.value)
       setUserSearchArray(e.target.value.trim().split(/\s+/g));
@@ -184,17 +175,6 @@ const Home = () => {
                         value={postSearch} //value of a state that is initially defined as an empty string
                         onChange={(e)=>{setUserSearch(''); setPostSearch(e.target.value)}} //sets the search state to the value of the input
                       />
-                      {/* <ChipInput 
-                        disabled={userSearch.length>0}
-                        style={{backgroundColor: userSearch ? '#d8d8d8' : '#fff', margin:'0 0 0.7rem 0'}}
-                        value={tags} //it is an array defined above using state
-                        onAdd={(chip) => handleAdd(chip)} //it is a function that adds to the array of tags and thus creating
-                        //a chip input tag on click of the enter button 
-                        onDelete={(chip) => handleDelete(chip)} //it is a function that removes the tag upon clicking its
-                        //corresponding x button
-                        label='Search Tags' //it is the label that labels the input field 
-                        variant="outlined" //certain style.check the docs for other styles.
-                      /> */}
                       <div style={{display:'flex', width: '100%', justifyContent:'space-around'}}>
                         <Button onClick={clear} style={{backgroundColor:'red', color:'white'}} variant='contained'>Clear</Button>
                         <Button onClick={search} color='primary' variant='contained'>Search</Button>
