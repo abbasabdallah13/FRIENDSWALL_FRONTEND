@@ -13,10 +13,10 @@ You can view a live demo of this project [here](https://friendswall.netlify.app/
 
 ## Installation
 1. Clone the repository
-   git clone https://github.com/[USERNAME]/PROJECT_NAME.git // repo url can be copied from above
-   cd PROJECT_NAME
+   - git clone https://github.com/[USERNAME]/PROJECT_NAME.git // repo url can be copied from above
+   - cd PROJECT_NAME
 2. Install dependencies
-   npm install
+   - npm install
 
 ## Features
 1. Create account
