@@ -1,49 +1,38 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby Minimal Starter
-</h1>
+# Friends Wall
 
-## 🚀 Quick start
+## Project Overview
+This is a social media platform where users can create an account or log in with their Google account. Then they can share posts, add friends, like and comment on each others posts, and edit account settings. The front-end was built using Gatsby and the back-end using Nodejs and Expressjs. The database storage used is Mongodb. 
 
-1.  **Create a Gatsby site.**
+## Demo
+You can view a live demo of this project [here]([https://boostplus.se](https://friendswall.netlify.app/)
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+## Screenshots
 
-    ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
-    ```
+![image](https://github.com/abbasabdallah13/FRIENDSWALL_FRONTEND/assets/89516669/b9c7ad4b-40a4-42bb-8736-e13a4df1cc80)
 
-2.  **Start developing.**
 
-    Navigate into your new site’s directory and start it up.
+## Installation
+1. Clone the repository
+   git clone https://github.com/[USERNAME]/PROJECT_NAME.git // repo url can be copied from above
+   cd PROJECT_NAME
+2. Install dependencies
+   npm install
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
+## Features
+1. Create account
+2. Log in
+3. Add friends
+4. Friends list
+5. Post memories/entries
+6. Like and comment on friends memories/entries
+7. Manage account settings
 
-3.  **Open the code and start customizing!**
+## Contributing 
+1. Fork the repository
+2. Create a new branch: `git checkout -b feature/new-feature`
+3. Make your changes and commit: `git commit -m "Added new feature"`
+4. Push to the branch: `git push origin feature/new-feature`
+5. Create a pull request
 
-    Your site is now running at http://localhost:8000!
-
-    Edit `src/pages/index.js` to see your site update in real-time!
-
-4.  **Learn more**
-
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [Tutorials](https://www.gatsbyjs.com/docs/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [Guides](https://www.gatsbyjs.com/docs/how-to/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-## 🚀 Quick start (Netlify)
-
-Deploy this starter with one click on [Netlify](https://app.netlify.com/signup):
-
-[<img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-minimal)
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE.md) file for details.
