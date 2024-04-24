@@ -4,7 +4,7 @@
 This is a social media platform where users can create an account or log in with their Google account. Then they can share posts, add friends, like and comment on each others posts, and edit account settings. The front-end was built using Gatsby and the back-end using Nodejs and Expressjs. The database storage used is Mongodb. 
 
 ## Demo
-You can view a live demo of this project [here]([https://boostplus.se](https://friendswall.netlify.app/)
+You can view a live demo of this project [here](https://friendswall.netlify.app/)
 
 ## Screenshots
 
