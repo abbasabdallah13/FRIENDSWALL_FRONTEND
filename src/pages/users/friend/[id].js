@@ -6,7 +6,8 @@ import Paginate from "../../../components/Pagination";
 import noPostsFound from '../../../assets/nopostsfound.png'
 import GlobalVariablesContext from "../../../context/globalVariables";
 
-const Friend = ({id}) => {
+export default function Component({id}) {
+
  
   const [page, setPage] = useState(1);
   
@@ -56,4 +57,3 @@ const Friend = ({id}) => {
   )
 };
 
-export default Friend;

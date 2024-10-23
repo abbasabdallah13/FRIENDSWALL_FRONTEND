@@ -20,7 +20,7 @@ import Details from "../../components/Details.jsx";
 import GlobalVariablesContext from "../../context/globalVariables.js";
 
 
-const PostDetails = () => {
+export default function Component() {
   let post, user;
   const dispatch = useDispatch();
   const location = useLocation()
@@ -179,5 +179,3 @@ const PostDetails = () => {
   )
   )
 };
-
-export default PostDetails;

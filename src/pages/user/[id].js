@@ -26,7 +26,8 @@ import Banner from "../../components/userBanner/Banner/Banner.jsx";
 import testBanner from "../../assets/testbanner.png";
 
 
-const UserDetails = () => {  
+export default function Component() {
+
   const location = useLocation();
   const dispatch = useDispatch()
   
@@ -221,4 +222,3 @@ const UserDetails = () => {
     )
 };
 
-export default UserDetails;

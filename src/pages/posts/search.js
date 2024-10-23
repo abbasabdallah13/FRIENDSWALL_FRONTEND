@@ -26,7 +26,7 @@ function useQuery() {
   //on and what search term are we looking for
 }
 
-const Home = () => {
+export default function Component() {
 
     const [userSearch, setUserSearch] = useState('');
     const [userSearchArray, setUserSearchArray] = useState([]);
@@ -217,4 +217,3 @@ const Home = () => {
   )
 };
 
-export default Home;

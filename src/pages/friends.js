@@ -12,7 +12,7 @@ import Friend from "../components/Friends/Friend/Friend";
 
 import GlobalVariablesContext from '../context/globalVariables'
 
-const Friends = () => {
+export default function Component () {
 
   const { bannerOrFriends, setBannerOrFriends } = useContext(GlobalVariablesContext)  
   const loggedUser = useSelector(state => state.user.loggedUser)
@@ -65,4 +65,3 @@ const Friends = () => {
   )
 };
 
-export default Friends;

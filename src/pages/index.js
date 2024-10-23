@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import * as React from "react"
 
 import { Container, Grow, Grid, AppBar, TextField, Button, CircularProgress, Box } from '@mui/material'
 import ArrowDropDownCircle from '@mui/icons-material/ArrowDropDownCircle'
@@ -22,17 +22,17 @@ import ScrollToTop from "../components/ScrollToTop/ScrollToTop";
 import noPostsFound from '../assets/nopostsfound.png'
 import GlobalVariablesContext from "../context/globalVariables";
 
-const Home = () => {
+export default function Component() {
 
-    const [userSearch, setUserSearch] = useState('');
-    const [userSearchArray, setUserSearchArray] = useState([]);
-    const [openSearch, setOpenSearch] = useState(false);  
-    const [postSearch, setPostSearch] = useState('');
-    const [tags, setTags] = useState([]);
-    const [createMemoryForm, setCreateMemoryForm] = useState(false);
-    const [showPaginate, setShowPaginate] = useState(true);
+    const [userSearch, setUserSearch] = React.useState('');
+    const [userSearchArray, setUserSearchArray] = React.useState([]);
+    const [openSearch, setOpenSearch] = React.useState(false);  
+    const [postSearch, setPostSearch] = React.useState('');
+    const [tags, setTags] = React.useState([]);
+    const [createMemoryForm, setCreateMemoryForm] = React.useState(false);
+    const [showPaginate, setShowPaginate] = React.useState(true);
     
-    const {currentId, setCurrentId, scrollToTopButton, setScrollToTopButton} = useContext(GlobalVariablesContext)
+    const {currentId, setCurrentId, scrollToTopButton, setScrollToTopButton} = React.useContext(GlobalVariablesContext)
     
     const dispatch = useDispatch();
     const location = useLocation();
@@ -41,17 +41,17 @@ const Home = () => {
     
     const page = queryString.parse(location.search).page || 1; 
 
-    useEffect(() => {
+    React.useEffect(() => {
       dispatch(getPosts())
     }, [page]);
     
-    useEffect(() => {
+    React.useEffect(() => {
      if(!location.search){
       setShowPaginate(true)
      }
     }, [openSearch]);
 
-    useEffect(() => {
+    React.useEffect(() => {
       window.addEventListener('scroll', () => {
         if(window.scrollY > 100){
           setScrollToTopButton(true);
@@ -211,4 +211,3 @@ const Home = () => {
   )
 };
 
-export default Home;
