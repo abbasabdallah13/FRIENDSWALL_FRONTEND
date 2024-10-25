@@ -3,10 +3,10 @@
  */
 module.exports = {
   siteMetadata: {
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl: `http://localhost:8000/`,
   },
   flags: {
-    DEV_SSR: true,
+    DEV_SSR: false,
   },
   plugins: [],
   

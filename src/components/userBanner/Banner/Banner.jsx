@@ -17,11 +17,8 @@ import { getCountryFlag } from "../../../utils/utils";
 
 const Banner = ({user, userInfo, addFriendBtn, component, setBannerOrFriends,style, className}) => {
     const loggedUser = useSelector(state => state.user.loggedUser);
-    let localStorageUser;  
+    let localStorageUser = JSON.parse(localStorage.getItem('user'));  
     
-    useEffect(()=>{
-      localStorageUser = JSON.parse(localStorage.getItem('user'));
-    },[])
 
     const dispatch = useDispatch();
 
@@ -41,6 +38,7 @@ const Banner = ({user, userInfo, addFriendBtn, component, setBannerOrFriends,sty
     }
 
     useEffect(() => {
+      console.log(user)
         if(addFriendBtn){
           const friends = user?.friends?.map(friend => friend._id);
           const ids = user?.requests?.map(request => request._id);
@@ -128,19 +126,19 @@ const Banner = ({user, userInfo, addFriendBtn, component, setBannerOrFriends,sty
       {
         addFriendBtn && (
           <div style={{display:'flex', justifyContent: 'end', alignItems: 'center',borderRadius: '8px', padding: '0.3rem'}}>
-            <Button 
-              disabled={!localStorageUser}
-              style={{display:'flex', alignItems:'center', backgroundColor: !user ? 'grey' : ''}} 
-              variant='outlined'
-              onClick={()=>{friendActions(user?._id)}} 
-            > 
-              {
-                bannerButton !== 'Friends' && (
-                  <PersonAdd style={{marginRight: '0.4rem'}}/> 
-                )
-              } 
-              <span>{bannerButton}</span>
-            </Button>
+                <Button
+                  disabled={!localStorageUser} 
+                  style={{display:'flex', alignItems:'center', backgroundColor: !user ? 'grey' : ''}} 
+                  variant='outlined'
+                  onClick={()=>{friendActions(user?._id)}} 
+                > 
+                  {
+                    bannerButton !== 'Friends' && (
+                      <PersonAdd style={{marginRight: '0.4rem'}}/> 
+                    )
+                  } 
+                  <span>{bannerButton}</span>
+                </Button>
           </div>
         )
       }

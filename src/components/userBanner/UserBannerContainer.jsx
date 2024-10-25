@@ -6,6 +6,7 @@ import Banner from "./Banner/Banner";
 
 const UserBannerContainer = () => {
     const { users } = useSelector(state => state.posts)
+    console.log(users);
 
   return (
         <div style={{display:'flex', flexWrap:'wrap', gap: '0.5rem'}}>

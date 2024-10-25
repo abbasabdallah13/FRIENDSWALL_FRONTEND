@@ -38,6 +38,7 @@ export const searchAction = (searchQuery) => async (dispatch) => {
     try {
         dispatch({type: START_LOADING})
         const { data: { data } } = await api.search(searchQuery)
+        console.log(data);
         if(searchQuery.userSearch){
             dispatch({type: FETCH_USERS_BY_SEARCH, payload: data})
         }else{
