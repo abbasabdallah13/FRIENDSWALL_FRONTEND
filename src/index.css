@@ -304,17 +304,6 @@ opacity: 0;
    
 }
 
-.click-friends-banner{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    background-color:#c8c8c8;
-    border-radius: 8px;
-    height:100%;
-    padding: 0 25px;
-}
-
 .banner-or-friends-container{
     height:87vh;
     border-radius: 8px;

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { Box, Grid, Typography } from "@mui/material";
 
@@ -16,11 +16,17 @@ export default function Component () {
 
   const { bannerOrFriends, setBannerOrFriends } = useContext(GlobalVariablesContext)  
   const loggedUser = useSelector(state => state.user.loggedUser)
+
+  const [selectedFriend, setSelectedFriend] = useState(null)
+
+  useEffect(() => {
+    console.log(selectedFriend)
+  }, [selectedFriend])
+  
     
   return (
-    <Box>
       <Grid container>
-        <Grid item sx={{backgroundColor: bannerOrFriends === 'friends' ? '#fff' : '', width: bannerOrFriends === 'friends' ? 'fit-content' : '', height: bannerOrFriends === 'friends' ? '100vh' : '', overflowY: bannerOrFriends === 'friends' ? 'scroll' : ''}}  className="banner-or-friends-container" sm={5} md={3} >
+        <Grid item sx={{backgroundColor: bannerOrFriends === 'friends' ? '#fff' : '', width: bannerOrFriends === 'friends' ? 'fit-content' : '', minHeight: '100vh', overflowY: bannerOrFriends === 'friends' ? 'scroll' : ''}}  className="banner-or-friends-container" sm={5} md={3} >
             {
               bannerOrFriends === 'friends' ? (
                 <Box sx={{width:'100%', display: 'flex', flexDirection:'column'}}>
@@ -28,7 +34,11 @@ export default function Component () {
                   <Box sx={{width:'100%'}}>
                       { 
                           loggedUser?.friends?.map((friend,i) => (
-                            <Box sx={{padding: '10px', width: '100%', display: 'flex', gap:'5px', alignItems: 'center', marginTop: '10px', cursor: 'pointer', '&:hover': {backgroundColor: '#E7E1D9'}}} onClick={()=>{setBannerOrFriends(friend)}}>
+                            <Box
+                              key={i} 
+                              sx={{padding: '10px', width: '100%', display: 'flex', gap:'5px', alignItems: 'center', cursor: 'pointer', '&:hover': {backgroundColor: '#E7E1D9'}, backgroundColor: `${friend._id === selectedFriend ? '#E7E1D9' : ''}`}} 
+                              onClick={() => setSelectedFriend(friend._id)}
+                              >
                               <Box>
                                 <img src={friend.picture} style={{height:'3rem', width:'3rem', borderRadius: '50%'}}/>
                               </Box>
@@ -45,22 +55,21 @@ export default function Component () {
                 )
              }
         </Grid>
-        <Grid item xs={bannerOrFriends === 'friends' ? 5: 12} sm={7} md={9} sx={{padding:'0 0.5rem'}}>
+        <Grid item xs={bannerOrFriends === 'friends' ? 5: 12} sm={7} md={9} sx={{padding:'0 0.5rem', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: `${!selectedFriend ? '#c8c8c8' : 'white'}`}} >
           {
-            (bannerOrFriends === 'friends') ? (
-              <Box className="click-friends-banner">
-                <PeopleOutline fontSize="large"  /> 
-                <p>Select people's names to preview their profile.</p>
+            !selectedFriend ? (
+              <Box sx={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <PeopleOutline fontSize="large" /> 
+                <p>Select a friend's name to preview their profile.</p>
               </Box>
             ) : (
               <Box className="friends-posts">
-                <Friend id={bannerOrFriends._id} bannerOrFriends={bannerOrFriends} />
+                <Friend id={selectedFriend} bannerOrFriends={bannerOrFriends} />
               </Box>
             )
           }
         </Grid>
       </Grid>
-  </Box>
   )
 };
 

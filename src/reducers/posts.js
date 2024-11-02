@@ -28,7 +28,7 @@ const postsReducer = (state = { isLoading: false, allPosts:[],post: {comments:[]
             }
         case GET_FRIEND_POSTS:    
             return {
-                ...state, //always spread the state when working with objects
+                ...state, 
                 userPosts: action.payload.data,
                 currentPage: action.payload.currentPage,
                 numberOfPages: action.payload.numberOfPages,
@@ -36,7 +36,7 @@ const postsReducer = (state = { isLoading: false, allPosts:[],post: {comments:[]
             }
         case CLEAR_FRIEND_STATE:
             return {
-                ...state, //always spread the state when working with objects
+                ...state, 
                 userPosts: [],
                 currentPage: 0,
                 numberOfPages: 0,

@@ -19,7 +19,7 @@ const Friend = ({id, bannerOrFriends}) => {
 
   return ( 
     <Box sx={{backgroundColor:'transparent', borderRadius: '8px', height:'100%', margin:'0rem 1rem', display:'flex', alignItems:'center', flexDirection:'column', justifyContent:'space-between'}}>
-      <Grid style={{height:"100%"}}  container spacing={3}>
+      <Grid style={{height:"100%"}} container spacing={3}>
       {
         isLoading ?
         <Box style={{display:'flex', justifyContent:'center', alignItems:'center', width:'100%', height:'100%'}}>
@@ -31,6 +31,7 @@ const Friend = ({id, bannerOrFriends}) => {
           (
             <Box style={{width:'100%', display:'flex', justifyContent:'center', alignItems:'center', backgroundColor:'#fff', marginTop:'1rem', borderRadius:'8px', padding:'2rem'}}>
               <img style={{maxWidth:'100%'}}  src={noPostsFound} alt='no posts found' />
+              {id}
             </Box>
           ):
           <>
