@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 
-import { Container, Grow, Grid, AppBar, TextField, Button, CircularProgress } from '@mui/material'
+import { Container, Grow, Grid, AppBar, TextField, Button, Box } from '@mui/material'
 import ArrowDropDownCircle from '@mui/icons-material/ArrowDropDownCircle'
 import Cancel from '@mui/icons-material/CancelOutlined'
 
@@ -11,7 +11,7 @@ import { navigate, useLocation } from '@reach/router'
 import { getPosts, getPostsPerPage, searchAction } from '../../actions/posts'
 
 import Posts from "../../components/posts/Posts";
-import Form from "../../components/form/Form";
+import Form from "../../components/Form/Form";
 import Paginate from '../../components/Pagination'
 import UserBannerContainer from "../../components/userBanner/UserBannerContainer";
 import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
@@ -19,6 +19,7 @@ import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
 
 import noPostsFound from '../../assets/nopostsfound.png'
 import GlobalVariablesContext from "../../context/globalVariables";
+import Spinner from "../../components/Spinner";
 
 
 function useQuery() {
@@ -117,9 +118,9 @@ export default function Component() {
               {
                 isLoading ? (
                   <Grid item xs={12} md={9} >
-                    <div style={{ display:'flex', justifyContent:'center', alignItems:'center', height: '100%' }}>
-                      <CircularProgress />
-                    </div>
+                    <Box sx={{ display:'flex', justifyContent:'center', alignItems:'center', height: '100%' }}>
+                      <Spinner />
+                    </Box>
                   </Grid>
                 ) : ( users.length && !posts.length ) ? (
                   <Grid item xs={12} md={9} >

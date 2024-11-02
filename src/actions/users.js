@@ -1,4 +1,4 @@
-import { END_LOADING, GET_USER_INFO, START_LOADING, UPDATE_USER_INFO, ADD_FRIEND, GET_REQUESTOR_INFO, ACCEPT_FRIEND, DECLINE_FRIEND, GET_FRIEND_DETAILS, GET_FRIEND_POSTS, UNFRIEND, GET_USER_INFO_BY_EMAIL } from '../constants/actionTypes'
+import { END_LOADING, GET_USER_INFO, START_LOADING, UPDATE_USER_INFO, ADD_FRIEND, GET_REQUESTOR_INFO, ACCEPT_FRIEND, DECLINE_FRIEND, GET_FRIEND_DETAILS, GET_FRIEND_POSTS, UNFRIEND, GET_USER_INFO_BY_EMAIL, FETCH_USERS_BY_SEARCH } from '../constants/actionTypes'
 import * as api from '../api' 
 
 
@@ -104,4 +104,15 @@ export const getFriendDetailsAction = (id,page) => async dispatch => {
     }
 }
 
+export const userSearchAction = (searchQuery) => async (dispatch) => {
+    try {
+        dispatch({type: START_LOADING})
+        const { data: { data } } = await api.userSearch(searchQuery)
+        console.log(data)
+        dispatch({type: FETCH_USERS_BY_SEARCH, payload: data})
+        dispatch({type: END_LOADING})
+    } catch (error) { 
+        console.log(error.message)
+    }
+}
 

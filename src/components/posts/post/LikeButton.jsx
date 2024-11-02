@@ -10,43 +10,29 @@ import ThumbUpAltOutlined from '@mui/icons-material/ThumbUpAltOutlined';
 import { likePost } from "../../../actions/posts";
 
 
-const LikeButton = ({post}) => {
-    const [likeMsg, setLikeMsg] = useState('')
-    const [disabled, setDisabled] = useState(true)
+const LikeButton = ({post, likeMsg}) => {
     const dispatch = useDispatch();
-    let user;
 
-    useEffect(()=>{
-        user = JSON.parse(localStorage.getItem('user'));
-        if(user?.result._id) setDisabled(false)
-        if(post?.likes?.indexOf(user?.result?._id || user?.result?.googleId) === -1){
-            setLikeMsg('Like')
-        }else{
-            setLikeMsg('Unlike')
-        }
-    },[post])
-
-
-    const likePostFunc = (event) => {
-        event.stopPropagation()
+    const likePostFunc = (e) => {
+        e.stopPropagation()
         dispatch(likePost(post?._id))
     }
     
-    if (!disabled) return (
+   return (
     <Button size="small" color="primary" onClick={likePostFunc}>
         {
-            
             (
-            <>
-                { 
-                    likeMsg === 'Unlike' ? 
-                    <ThumbUpAltIcon fontSize="small" /> :
-                    <ThumbUpAltOutlined fontSize="small" />
-                }
-                &nbsp; 
-                {post?.likes?.length}&nbsp;
-                { likeMsg }
-            </>
+                <>
+                    { 
+                        likeMsg === 'Unlike' ? 
+                        <ThumbUpAltIcon fontSize="small" /> :
+                        <ThumbUpAltOutlined fontSize="small" />
+                    }
+                    &nbsp; 
+                    {post?.likes?.length}
+                    &nbsp;
+                    {likeMsg}
+                </>
             )
         }
     </Button>

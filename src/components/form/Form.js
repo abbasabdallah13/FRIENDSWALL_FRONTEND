@@ -71,16 +71,16 @@ const Form = ({currentId, setCurrentId, setEditPostModal}) => {
 
   return (
         <Paper sx={{padding: '15px'}}>
-          <form autoComplete="off" noValidate onSubmit={handleSubmit} sx={{margin: '5px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}  > 
+          <form autoComplete="off" noValidate onSubmit={handleSubmit} style={{margin: '5px', display: 'flex', flexDirection:'column', rowGap: '15px' ,flexWrap: 'wrap', justifyContent: 'center'}}> 
             <Typography variant="h6">
               {!currentId ? `Creating` : 'Editing'} a Memory
             </Typography>
             <TextField name="title" variant="outlined" label='Title' fullWidth value={postData.title} onChange={(e) => setPostData({...postData, title: e.target.value})} />
-            <TextField name="message" variant="outlined" label='Message' fullWidth value={postData.message} onChange={(e) => setPostData({...postData, message: e.target.value})} />
-            <TextField name="tags" variant="outlined" label='Tags (separate multiple tags by a comma)' style={{padding:'5px'}}  fullWidth value={postData.tags} onChange={(e) => setPostData({...postData, tags: e.target.value.split(',')})} />
-            <div sx={{width: '97%', margin: '10px 0'}}><FileBase type='file' multiple={false} onDone={({base64}) => setPostData({ ...postData, selectedFile: base64})} /></div>
-            <Button sx={{margin: '10px 0 10px 0'}} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
-            <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>
+            <TextField name="message" variant="outlined" multiline maxRows={4} label='Message' fullWidth value={postData.message} onChange={(e) => setPostData({...postData, message: e.target.value})} />
+            <TextField name="tags" variant="outlined" label='Tags (separate by a comma)' fullWidth value={postData.tags} onChange={(e) => setPostData({...postData, tags: e.target.value.split(',')})} />
+            <FileBase type='file' multiple={false} onDone={({base64}) => setPostData({ ...postData, selectedFile: base64})} />
+            <Button variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
+            <Button variant="contained" color="error" size="large" onClick={clear} fullWidth>Clear</Button>
           </form>
         </Paper>
     )

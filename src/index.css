@@ -25,7 +25,6 @@
 
     .created-at{
         text-align:right;
-        font-size: 0.6rem;
         margin-top:1rem;
     }
 
@@ -56,8 +55,7 @@
     .post-img{
         border-radius: 20px;
         object-fit: cover;
-        max-width: 100%;
-        max-height: 600px;
+        width: 100%;
     }
 
     .form-container{
@@ -84,6 +82,12 @@
 
     .created-at{
         font-size: 1rem;
+    }
+
+    .post-img{
+        border-radius: 20px;
+        object-fit: cover;
+        width: 50%;
     }
 }
 
@@ -298,21 +302,6 @@ opacity: 0;
         display: flex;
     }
    
-}
-
-.friend-button{
-    transition:0.5s;
-    cursor:pointer;
-    padding:1rem 1rem;
-    display: flex;
-    align-items:center;
-    gap:1rem;
-    border-radius:5px;
-    width: 100%;
-}
-
-.friend-button:hover{
-    background-color: #e8e8e8;
 }
 
 .click-friends-banner{

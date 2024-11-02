@@ -10,7 +10,7 @@ import FileBase from "react-file-base64"
 
 import ReactCountryFlag from "react-country-flag"
 
-import { Button, CircularProgress, Divider, TextField } from "@mui/material";
+import { Box, Button, Divider, TextField } from "@mui/material";
 
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline.js"
 import Cancel from "@mui/icons-material/Cancel.js"
@@ -24,6 +24,7 @@ import CountrySelect from "../../components/CountrySelect.jsx";
 import Banner from "../../components/userBanner/Banner/Banner.jsx";
 
 import testBanner from "../../assets/testbanner.png";
+import Spinner from "../../components/Spinner.jsx";
 
 
 export default function Component() {
@@ -115,51 +116,54 @@ export default function Component() {
     dispatch(updateUserInfoAction(id, userInfo))
   }
 
-  return isLoading ?<div style={{width:'100%', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}><CircularProgress /></div> : (
-    <div className='oneStar'>
+  return isLoading ?
+      <Box sx={{width:'100%', height:'100vh', display:'flex', justifyContent:'center', alignItems:'center'}}>
+        <Spinner />
+      </Box> : (
+    <Box className='oneStar'>
       {/* 1 */}
-      <div className="one"> 
+      <Box className="one"> 
           {/* 2 */}
           <Banner user={user} userInfo={userInfo} addFriendBtn={false} className={'two user-banner-component'} />
           {/* 3 */}
-          <div className='three'>
+          <Box className='three'>
             {/* 4 */}
             <img className='four' src={testBanner} alt='profile banner' />
             {/* 5 */}
             <form className='five' onSubmit={updateUserInfo}>
                 {/* 6 */}
-                <div className="six">
+                <Box className="six">
                   {/* 7 */}
-                  <div className="seven">
+                  <Box className="seven">
                   {
                       updatedBanner && (
-                        <div style={{display:'flex', justifyContent:'space-between', backgroundColor:'#EDF6EA', height:'3rem', borderRadius: '8px'}}>
+                        <Box sx={{display:'flex', justifyContent:'space-between', backgroundColor:'#EDF6EA', height:'3rem', borderRadius: '8px'}}>
                           <p style={{padding:'0.3rem', display:'flex', alignItems:'center', color:'green'}}>
                             <CheckCircleOutlineIcon style={{fill:'green', marginLeft:'1rem'}} />
                             <span style={{marginLeft: '1rem'}}>{updatedBanner}</span>
                           </p>
-                          <div style={{display:'flex', alignItems:'center', justifyContent:'center', padding:'0.3rem'}}>
-                            <Divider style={{marginRight: '0.5rem'}}  orientation="vertical" />
+                          <Box sx={{display:'flex', alignItems:'center', justifyContent:'center', padding:'0.3rem'}}>
+                            <Divider sx={{marginRight: '0.5rem'}} orientation="vertical" />
                             <Cancel style={{fill:'green', cursor: 'pointer', marginRight: '0.3rem'}} onClick={()=>setUpdatedBanner(false)}  fontSize="medium" />
-                          </div>
-                        </div>
+                          </Box>
+                        </Box>
                       )
                   }
-                  <div style={{display:'flex', flexDirection:'column'}}>
-                    <div style={{display:'flex', flexDirection:'column', marginTop:'1rem'}}><label style={{fontWeight:'700'}}>First Name:</label><TextField  style={{marginTop:'0.3rem'}}  name="firstName" variant="outlined"  value={userInfo?.firstName || user?.firstName} onChange={(e) => userInfo ? setUserInfo({...userInfo, firstName: e.target.value}) : setUserInfo({...user, firstName: e.target.value})}/></div>
-                    <div style={{display:'flex', flexDirection:'column', marginTop:'1rem'}}><label style={{fontWeight:'700'}}>Last Name:</label><TextField  fullWidth  style={{marginTop:'0.3rem'}}  name="lastName" variant="outlined"  value={userInfo?.lastName || user?.lastName} onChange={(e) => userInfo ? setUserInfo({...userInfo, lastName: e.target.value}) : setUserInfo({...user, lastName: e.target.value})}/></div>
+                  <Box sx={{display:'flex', flexDirection:'column'}}>
+                    <Box sx={{display:'flex', flexDirection:'column', marginTop:'1rem'}}><label style={{fontWeight:'700'}}>First Name:</label><TextField  style={{marginTop:'0.3rem'}}  name="firstName" variant="outlined"  value={userInfo?.firstName || user?.firstName} onChange={(e) => userInfo ? setUserInfo({...userInfo, firstName: e.target.value}) : setUserInfo({...user, firstName: e.target.value})}/></Box>
+                    <Box sx={{display:'flex', flexDirection:'column', marginTop:'1rem'}}><label style={{fontWeight:'700'}}>Last Name:</label><TextField  fullWidth  style={{marginTop:'0.3rem'}}  name="lastName" variant="outlined"  value={userInfo?.lastName || user?.lastName} onChange={(e) => userInfo ? setUserInfo({...userInfo, lastName: e.target.value}) : setUserInfo({...user, lastName: e.target.value})}/></Box>
                     <label style={{fontWeight:'700', marginTop:'1rem'}}>Email: <span style={{backgroundColor:'#e8e8e8', padding:'0.3rem'}}>{user?.email}</span></label>
-                    <div style={{display:'flex', alignItems:'center', marginTop:'1rem'}}>
+                    <Box sx={{display:'flex', alignItems:'center', marginTop:'1rem'}}>
                       <label style={{fontWeight:'700'}}>Password:</label>
                       {
                         !changePasswordModal && (
                           <Button onClick={()=>setChangePasswordModal(true)}  variant="outlined" style={{marginLeft:'1rem', backgroundColor:'white', borderRadius:'7px', padding:'0.2rem 0.3rem'}} >{user.password === '%G%O%O%G%L%E%A%C%C%O%U%N%T%' ? 'Create a Password' : 'Change Password'}</Button>
                         )
                       }
-                    </div>
+                    </Box>
                     {
                       changePasswordModal && (
-                          <div style={{boxSizing:'border-box', backgroundColor: '#e0e0e0', padding:'1rem', borderRadius:'8px', position:'relative', display:'flex', flexDirection:'column', alignItems:'end', border:'1px solid black'}}>
+                          <Box sx={{boxSizing:'border-box', backgroundColor: '#e0e0e0', padding:'1rem', borderRadius:'8px', position:'relative', display:'flex', flexDirection:'column', alignItems:'end', border:'1px solid black'}}>
                             {
                               user.password === '%G%O%O%G%L%E%A%C%C%O%U%N%T%' && (
                                 <h4 style={{marginRight:'1rem'}}>Create a password for your account</h4>
@@ -167,24 +171,24 @@ export default function Component() {
                             } 
                             {
                               passwordErrorMessage.length > 0 && (
-                                <div style={{width: '100%', display: 'flex', alignItems:'center'}}><div style={{marginLeft:'1rem'}}><Cancel style={{fill:'red'}} /></div><p style={{marginLeft:'1rem'}}>{passwordErrorMessage}</p></div>
+                                <Box sx={{width: '100%', display: 'flex', alignItems:'center'}}><Box sx={{marginLeft:'1rem'}}><Cancel style={{fill:'red'}} /></Box><p style={{marginLeft:'1rem'}}>{passwordErrorMessage}</p></Box>
                               )
                             }
                             {
                                 user.password !== '%G%O%O%G%L%E%A%C%C%O%U%N%T%' && (
-                                <div style={{position:'relative', display:'flex',flexDirection:'column',marginTop:'1rem', width:'100%'}}><label>Old Password:</label><TextField required  style={{marginLeft:'1rem'}}  type='password' name="oldPassword" variant="outlined" onChange={(e)=>{ setOldPassword(e.target.value)}}/></div>
+                                <Box sx={{position:'relative', display:'flex',flexDirection:'column',marginTop:'1rem', width:'100%'}}><label>Old Password:</label><TextField required  style={{marginLeft:'1rem'}}  type='password' name="oldPassword" variant="outlined" onChange={(e)=>{ setOldPassword(e.target.value)}}/></Box>
                               )
                             }
-                            <div style={{display:'flex',flexDirection:'column',marginTop:'1rem', width:'100%'}}><label>New Password:</label><TextField required  style={{marginLeft:'1rem'}}  type='password' name="newPassword" variant="outlined" onChange={(e)=>{setNewPassword(e.target.value)}}/></div>
-                            <div style={{display:'flex',flexDirection:'column',marginTop:'1rem', width:'100%'}}><label>Confirm Password:</label><TextField required  style={{marginLeft:'1rem'}}  type='password' name="confirmPassword" variant="outlined" onChange={(e)=>{setConfirmPassword(e.target.value)}}/></div>
-                            <div style={{display:'flex', justifyContent:'space-between', width:'100%'}}>
+                            <Box sx={{display:'flex',flexDirection:'column',marginTop:'1rem', width:'100%'}}><label>New Password:</label><TextField required  style={{marginLeft:'1rem'}}  type='password' name="newPassword" variant="outlined" onChange={(e)=>{setNewPassword(e.target.value)}}/></Box>
+                            <Box sx={{display:'flex',flexDirection:'column',marginTop:'1rem', width:'100%'}}><label>Confirm Password:</label><TextField required  style={{marginLeft:'1rem'}}  type='password' name="confirmPassword" variant="outlined" onChange={(e)=>{setConfirmPassword(e.target.value)}}/></Box>
+                            <Box sx={{display:'flex', justifyContent:'space-between', width:'100%'}}>
                               <Button style={{marginTop:'1rem', width: '45%', backgroundColor:passwordErrorMessage.length > 0 ? 'grey':'green', color: 'white'}} disabled={passwordErrorMessage.length > 0 || passwordErrorMessage === 'null'}  variant="outlined"  onClick={updatePassword}>Update Password</Button>
                               <Button style={{marginTop:'1rem', width: '45%', backgroundColor:'white'}}  variant="outlined"  onClick={()=> {setChangePasswordModal(false); setPasswordErrorMessage('Fields cannot be empty!')}}>Cancel</Button>
-                            </div>
-                          </div>
+                            </Box>
+                          </Box>
                       )
                     }
-                    <div style={{display:'flex', alignItems:'center', marginTop:'1rem'}}>
+                    <Box sx={{display:'flex', alignItems:'center', marginTop:'1rem'}}>
                       <label>Country:</label>
                       <p style={{fontWeight:'700', marginLeft:'1rem'}}>
                         {userInfo?.country || user?.country}
@@ -194,31 +198,31 @@ export default function Component() {
                           style={{height:'1.4rem', width:'1.4rem', marginLeft:'1rem'}}
                         />
                       </p>
-                    </div>
-                    <CountrySelect setUserInfo={setUserInfo} userInfo={userInfo} /></div>
-                  </div> 
+                    </Box>
+                    <CountrySelect setUserInfo={setUserInfo} userInfo={userInfo} /></Box>
+                  </Box> 
                   {/* 8 */}
-                  <div className='eight'>
-                    <div style={{position:'relative', display:'flex', flexDirection:'column', alignItems:'center'}}>
-                        <div className="profile-pic-change-container">
+                  <Box className='eight'>
+                    <Box sx={{position:'relative', display:'flex', flexDirection:'column', alignItems:'center'}}>
+                        <Box className="profile-pic-change-container">
                           <img className='profile-pic-change' src={user?.picture} alt='profile picture' />  
                           <Button className='upload-pic-btn' style={{width:'3rem', height:'4rem', position:'absolute', bottom:'0', right:'2rem', borderRadius:'50%', display:'flex', justifyContent:'center', alignItems: 'center', backgroundColor:'white', padding:'0'}}> 
                             <CameraAlt fontSize='large' style={{position:'relative', left:'1rem'}} />
                             <FileBase type='file' multiple={false} onDone={({base64}) => setUserInfo({ ...userInfo, picture: base64})} />
                           </Button> 
-                        </div>
-                      </div>
-                    <div style={{display:'flex', alignItems:'center', marginTop:'1rem', width:'100%'}}><TextField style={{width:'100%'}}  inputProps={{ maxLength: 50 }} name="bio" variant="outlined" label='Bio' value={userInfo?.bio || user?.bio} onChange={(e) => {setUserInfo({...userInfo, bio: e.target.value})}}/></div>
-                  </div>
-                </div>
+                        </Box>
+                      </Box>
+                    <Box sx={{display:'flex', alignItems:'center', marginTop:'1rem', width:'100%'}}><TextField style={{width:'100%'}}  inputProps={{ maxLength: 50 }} name="bio" variant="outlined" label='Bio' value={userInfo?.bio || user?.bio} onChange={(e) => {setUserInfo({...userInfo, bio: e.target.value})}}/></Box>
+                  </Box>
+                </Box>
               {/* 9 */}
-              <div className='nine'> 
+              <Box className='nine'> 
                 <Button variant='contained' type='submit' disabled={!userInfoUpdated || changePasswordModal} style={{backgroundColor: !userInfoUpdated || changePasswordModal ? 'grey' :'green', color:'white'}}>Save</Button>
-              </div>
+              </Box>
             </form>
-          </div>
-      </div>
-    </div>
+          </Box>
+      </Box>
+    </Box>
     )
 };
 

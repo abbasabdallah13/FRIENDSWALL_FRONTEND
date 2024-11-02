@@ -1,43 +1,37 @@
 import * as React from "react"
 
-import { Container, Grow, Grid, AppBar, TextField, Button, CircularProgress, Box } from '@mui/material'
-import ArrowDropDownCircle from '@mui/icons-material/ArrowDropDownCircle'
-import Cancel from '@mui/icons-material/CancelOutlined'
+import { Container, Grow, Grid, Box } from '@mui/material'
+
 
 import { useDispatch, useSelector } from "react-redux"
 
-import { navigate,useLocation } from '@reach/router'
+import { navigate, useLocation } from '@reach/router'
 
 import queryString from 'query-string'
 
 import { getPosts, getPostsPerPage, searchAction } from '../actions/posts'
 
 import Posts from "../components/posts/Posts";
-import Form from "../components/form/Form";
-import Paginate from '../components/Pagination'
 import UserBannerContainer from "../components/userBanner/UserBannerContainer";
 import ScrollToTop from "../components/ScrollToTop/ScrollToTop";
 
 
 import noPostsFound from '../assets/nopostsfound.png'
 import GlobalVariablesContext from "../context/globalVariables";
+import Sidebar from "../components/Sidebar"
+import Spinner from "../components/Spinner"
 
 export default function Component() {
-
-    const [userSearch, setUserSearch] = React.useState('');
-    const [userSearchArray, setUserSearchArray] = React.useState([]);
-    const [openSearch, setOpenSearch] = React.useState(false);  
-    const [postSearch, setPostSearch] = React.useState('');
-    const [tags, setTags] = React.useState([]);
-    const [createMemoryForm, setCreateMemoryForm] = React.useState(false);
-    const [showPaginate, setShowPaginate] = React.useState(true);
-    
+   
+    const[searchByQuery, setSearchByQuery] = React.useState('');
     const {currentId, setCurrentId, scrollToTopButton, setScrollToTopButton} = React.useContext(GlobalVariablesContext)
     
     const dispatch = useDispatch();
     const location = useLocation();
+    const params = new URLSearchParams(window.location.search);
     
-    const { users, posts, isLoading } = useSelector(state => state.posts)
+    const { users } = useSelector(state => state.user)
+    const { posts, isLoading } = useSelector(state => state.posts)
     
     const page = queryString.parse(location.search).page || 1; 
 
@@ -45,11 +39,8 @@ export default function Component() {
       dispatch(getPosts())
     }, [page]);
     
-    React.useEffect(() => {
-     if(!location.search){
-      setShowPaginate(true)
-     }
-    }, [openSearch]);
+    
+    const [createMemoryForm, setCreateMemoryForm] = React.useState(false);
 
     React.useEffect(() => {
       window.addEventListener('scroll', () => {
@@ -61,48 +52,15 @@ export default function Component() {
       })
     }, []);
     
-    const handleKeyPress = (e) => {
-      if(e.keyCode === 13){
-        search();
-      }
-    }
-
-      const userSearchTrim = (e) => {
-      setUserSearch(e.target.value)
-      setUserSearchArray(e.target.value.trim().split(/\s+/g));
-      setTags([]);
-      setPostSearch('');
-
-    }
-
-    const search = () => {
-      setOpenSearch(false)
-      setShowPaginate(false)
-      if(userSearchArray.length || postSearch.trim() || tags.length){
-        dispatch(searchAction({userSearch: userSearchArray.join(','),postSearch, tags:tags.join(',')}))
-        navigate(`/posts/search/?userSearch=${userSearchArray.join(',')}&postSearch=${postSearch || 'none'}&tags=${tags.join(',')}`)
-      }else{
-        navigate('/') 
-      }
-    }
-
-    const clear = () => {
-      setUserSearch('');
-      setPostSearch('');
-      setTags([])
-      setOpenSearch(false)
-      dispatch(getPostsPerPage(page))
-      navigate('/')
-      setShowPaginate(true)
-    }  
+    
   
   return (
-    <div style={{position:'relative'}}>
+    <Box sx={{position:'relative'}}>
           {
               scrollToTopButton && (
-              <div style={{position:'fixed', bottom:'0.5rem', right:'1rem', zIndex:'11'}} onClick={()=> window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              <Box style={{position:'fixed', bottom:'0.5rem', right:'1rem', zIndex:'11'}} onClick={()=> window.scrollTo({ top: 0, behavior: 'smooth' })}>
                 <ScrollToTop />
-              </div>
+              </Box>
             )
           }
     <Grow in>
@@ -111,101 +69,25 @@ export default function Component() {
               {
                 isLoading ? (
                   <Grid item xs={12} md={9} >
-                    <div style={{ display:'flex', justifyContent:'center', alignItems:'center', height: '100%' }}>
-                      <CircularProgress />
-                    </div>
+                    <Box sx={{display:'flex', justifyContent:'center', alignItems:'center', height: '100vh'}}>
+                      <Spinner />
+                    </Box>
                   </Grid>
-                ) : ( users.length && !posts.length ) ? (
+                ) : (searchByQuery === 'user') ? (
                   <Grid item xs={12} md={9} >
                     <UserBannerContainer />
                   </Grid>
-                ) : ( !users.length && posts.length ) ? (
+                ) : (
                   <Grid item xs={12} md={9} >
                     <Posts setScrollToTopButton={setScrollToTopButton} setCreateMemoryForm={setCreateMemoryForm} setCurrentId={setCurrentId}  />
                   </Grid>
-                ): ( !users.length && !posts.length ) ? (
-                    <Grid item xs={12} md={9}>
-                      <div style={{display:'flex', justifyContent:'center', alignItems:'center', backgroundColor:'#fff', marginTop:'1rem', borderRadius:'8px', padding:'2rem'}}>
-                        <img style={{maxWidth:'100%'}}  src={noPostsFound} alt='no posts found' />
-                      </div>
-                    </Grid>
-                ) : ''
+                )
               }
-              <Grid item xs={12} sm={8} md={3} >
-                <Button onClick={()=> setOpenSearch((state) => !state)} style={{position:'relative', width:'100%',display:'flex', alignItems:'center', padding:'1rem', backgroundColor:'#f5f5f5', borderRadius: '8px', marginBottom: '0.7rem'}}>
-                  Search
-                  <span style={{cursor:'pointer', position:'absolute', right:'2rem'}}>
-                  {
-                    !openSearch ? (
-                      <ArrowDropDownCircle fontSize='medium' />
-                    ) : (
-                      <Cancel style={{cursor:'pointer'}} fontSize='medium' />
-                    )
-                  }
-                  </span>
-                </Button>
-            
-                {
-                  openSearch && (
-                    <AppBar sx={{borderRadius: 4, marginBottom: '1rem', display: 'flex', padding: '16px'}} position="static" color='inherit'>
-                    <TextField 
-                        style={{backgroundColor: postSearch || tags.length > 0 ? '#d8d8d8' : '#fff'}}
-                        disabled={postSearch.length || tags.length > 0}
-                        variant='outlined'
-                        label='Search Users'
-                        onKeyPress={handleKeyPress}
-                        fullWidth
-                        value={userSearch} //value of a state that is initially defined as an empty string
-                        onChange={userSearchTrim} //sets the search state to the value of the input
-                      />
-                      <TextField 
-                        disabled={userSearch.length>0}
-                        style={{backgroundColor: userSearch ? '#d8d8d8' : '#fff', margin:'0.7rem 0'}}
-                        name='search'
-                        variant='outlined'
-                        label='Search Memories'
-                        fullWidth
-                        onKeyPress={handleKeyPress} //function that allows search on enter click
-                        value={postSearch} //value of a state that is initially defined as an empty string
-                        onChange={(e)=>{setUserSearch(''); setPostSearch(e.target.value)}} //sets the search state to the value of the input
-                      />
-                      <div style={{display:'flex', width: '100%', justifyContent:'space-around'}}>
-                        <Button onClick={clear} style={{backgroundColor:'red', color:'white'}} variant='contained'>Clear</Button>
-                        <Button onClick={search} color='primary' variant='contained'>Search</Button>
-                      </div>
-                    </AppBar>
-                  )
-                }
-                <Button 
-                  onClick={()=> setCreateMemoryForm((state) => !state)} 
-                  style={{position:'relative',width:'100%',display:'flex', alignItems:'center', padding:'1rem', backgroundColor:'#f5f5f5', borderRadius: '8px', marginBottom: '0.7rem'}}
-                >
-                  Add Memory
-                  <span style={{cursor:'pointer', position:'absolute', right:'2rem'}}>
-                    {
-                      !createMemoryForm ? (
-                        <ArrowDropDownCircle fontSize='medium' />
-                      ) : (
-                        <Cancel fontSize='medium' />
-                      )
-                    }
-                  </span>
-                </Button>
-                  {
-                    createMemoryForm && (
-                      <Form currentId={currentId} setCurrentId={setCurrentId} />
-                    )
-                  }
-                  {
-                    showPaginate && (
-                      <Paginate page={page} component={'home'} />
-                    )
-                  }
-              </Grid>
+             <Sidebar setSearchByQuery={setSearchByQuery} setCreateMemoryForm={setCreateMemoryForm} createMemoryForm={createMemoryForm} />
             </Grid>
       </Container>
     </Grow>
-  </div>
+  </Box>
     
 
   )

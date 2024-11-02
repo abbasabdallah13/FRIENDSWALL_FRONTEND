@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 
 import { useSelector } from "react-redux";
 
@@ -18,50 +18,49 @@ export default function Component () {
   const loggedUser = useSelector(state => state.user.loggedUser)
     
   return (
-    <div style={{padding: '0 1rem', boxSizing:'border-box'}}>
+    <Box>
       <Grid container>
-        <Grid item style={{backgroundColor: bannerOrFriends === 'friends' ? '#fff' : '', width: bannerOrFriends === 'friends' ? 'fit-content' : '', height: bannerOrFriends === 'friends' ? '100vh' : '', overflowY: bannerOrFriends === 'friends' ? 'scroll' : ''}}  className="banner-or-friends-container" sm={5} md={3} >
+        <Grid item sx={{backgroundColor: bannerOrFriends === 'friends' ? '#fff' : '', width: bannerOrFriends === 'friends' ? 'fit-content' : '', height: bannerOrFriends === 'friends' ? '100vh' : '', overflowY: bannerOrFriends === 'friends' ? 'scroll' : ''}}  className="banner-or-friends-container" sm={5} md={3} >
             {
               bannerOrFriends === 'friends' ? (
-                <>
-                  <h3 style={{padding:'0rem 1rem'}}>{loggedUser?.friends?.length} Friends</h3>
-                  <div style={{width:'100%'}}>
+                <Box sx={{width:'100%', display: 'flex', flexDirection:'column'}}>
+                  <Typography variant="body1" sx={{margin: '10px'}}>{loggedUser?.friends?.length} Friends</Typography>
+                  <Box sx={{width:'100%'}}>
                       { 
                           loggedUser?.friends?.map((friend,i) => (
-                            <div className="friend-button" onClick={()=>{setBannerOrFriends(friend)}}>
-                              <div>
+                            <Box sx={{padding: '10px', width: '100%', display: 'flex', gap:'5px', alignItems: 'center', marginTop: '10px', cursor: 'pointer', '&:hover': {backgroundColor: '#E7E1D9'}}} onClick={()=>{setBannerOrFriends(friend)}}>
+                              <Box>
                                 <img src={friend.picture} style={{height:'3rem', width:'3rem', borderRadius: '50%'}}/>
-                              </div>
-                              <div>
+                              </Box>
+                              <Box>
                                 <h3>{friend.firstName} {friend.lastName}</h3>
-                              </div>
-                            </div>
+                              </Box>
+                            </Box>
                           ))
                       }
-                  </div>
-                </>
+                  </Box>
+                </Box>
                 ):(
-                  <Banner user={bannerOrFriends} addFriendBtn={false} component={'friends'} setBannerOrFriends={setBannerOrFriends} style={{height:'100%'}} className={'two friends-banner-component'}  />
+                  <Banner user={bannerOrFriends} addFriendBtn={false} component={'friends'} setBannerOrFriends={setBannerOrFriends} sx={{height:'100%'}} className={'two friends-banner-component'}  />
                 )
              }
         </Grid>
-
-        <Grid item xs={bannerOrFriends === 'friends' ? 5: 12} sm={7} md={9} style={{padding:'0 0.5rem'}}>
+        <Grid item xs={bannerOrFriends === 'friends' ? 5: 12} sm={7} md={9} sx={{padding:'0 0.5rem'}}>
           {
             (bannerOrFriends === 'friends') ? (
-              <div className="click-friends-banner">
+              <Box className="click-friends-banner">
                 <PeopleOutline fontSize="large"  /> 
                 <p>Select people's names to preview their profile.</p>
-              </div>
+              </Box>
             ) : (
-              <div className="friends-posts">
+              <Box className="friends-posts">
                 <Friend id={bannerOrFriends._id} bannerOrFriends={bannerOrFriends} />
-              </div>
+              </Box>
             )
           }
         </Grid>
       </Grid>
-  </div>
+  </Box>
   )
 };
 

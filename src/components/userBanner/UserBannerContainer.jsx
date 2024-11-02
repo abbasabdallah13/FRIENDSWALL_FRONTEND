@@ -5,13 +5,12 @@ import { useSelector } from "react-redux";
 import Banner from "./Banner/Banner";
 
 const UserBannerContainer = () => {
-    const { users } = useSelector(state => state.posts)
-    console.log(users);
+    const { users } = useSelector(state => state.user)
 
   return (
         <div style={{display:'flex', flexWrap:'wrap', gap: '0.5rem'}}>
             {
-              users.map(user=> (
+              users?.map(user=> (
                 <Banner key={user._id}  user={user} addFriendBtn={true} className={'two'} />
               )
             )

@@ -27,25 +27,22 @@ export const getPostsPerPage = (page) => async(dispatch) => {
 
 export const getPosts = () => async(dispatch) => {
     try {
+        dispatch({type: START_LOADING})
         const { data } = await api.fetchPosts();
+        console.log(data);
         dispatch({type:FETCH_ALL_POSTS, payload: data})
+        dispatch({type: END_LOADING})
     } catch (error) {
         console.log(error.message)
     }
 }
 
-export const searchAction = (searchQuery) => async (dispatch) => {
+export const postsSearchAction = (searchQuery) => async (dispatch) => {
     try {
         dispatch({type: START_LOADING})
-        const { data: { data } } = await api.search(searchQuery)
-        console.log(data);
-        if(searchQuery.userSearch){
-            dispatch({type: FETCH_USERS_BY_SEARCH, payload: data})
-        }else{
-            dispatch({type: FETCH_POSTS_BY_SEARCH, payload: data})
-        }
+        const { data: { data } } = await api.postsSearch(searchQuery)
+        dispatch({type: FETCH_POSTS_BY_SEARCH, payload: data})
         dispatch({type: END_LOADING})
-
     } catch (error) { 
         console.log(error.message)
     }

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// const API = axios.create({ baseURL:'http://localhost:5000' })
-const API = axios.create({ baseURL:'https://memories-backend-api.vercel.app' })
+const API = axios.create({ baseURL:'http://localhost:5000' })
+// const API = axios.create({ baseURL:'https://memories-backend-api.vercel.app' })
 
 API.interceptors.request.use(req => {
     if(localStorage.getItem('user')){
@@ -17,7 +17,9 @@ export const fetchPost = (id) => API.get(`/posts/${id}`)
 
 export const fetchPostsPerPage = (page) => API.get(`/posts?page=${page}`)
 
-export const search = (searchQuery) => API.get(`/posts/search?userSearch=${searchQuery.userSearch}&postSearch=${searchQuery.postSearch || 'none'}&tags=${searchQuery.tags}`)
+export const postsSearch = (searchQuery) => API.get(`/posts/search?postSearch=${searchQuery.postSearch || 'none'}&tags=${searchQuery.tags || 'none'}`)
+
+export const userSearch = (searchQuery) => API.get(`/users/search?userSearch=${searchQuery.userSearch}`)
 
 export const createPost = (newPost) => API.post('/posts', newPost)
 

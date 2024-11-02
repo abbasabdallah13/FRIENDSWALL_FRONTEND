@@ -1,10 +1,11 @@
-import { CircularProgress, Container, Grid, Paper, Zoom } from "@mui/material";
+import {Box, Container, Grid, Paper, Zoom } from "@mui/material";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Post from "../../posts/post/Post";
 import Paginate from "../../Pagination";
 import noPostsFound from '../../../assets/nopostsfound.png'
 import './index.css'
+import Spinner from "../../Spinner";
 
 const Friend = ({id, bannerOrFriends}) => {
  
@@ -17,20 +18,20 @@ const Friend = ({id, bannerOrFriends}) => {
   
 
   return ( 
-    <div style={{backgroundColor:'transparent', borderRadius: '8px', height:'100%', margin:'0rem 1rem', display:'flex', alignItems:'center', flexDirection:'column', justifyContent:'space-between'}}>
+    <Box sx={{backgroundColor:'transparent', borderRadius: '8px', height:'100%', margin:'0rem 1rem', display:'flex', alignItems:'center', flexDirection:'column', justifyContent:'space-between'}}>
       <Grid style={{height:"100%"}}  container spacing={3}>
       {
         isLoading ?
-        <div style={{display:'flex', justifyContent:'center', alignItems:'center', width:'100%', height:'100%'}}>
-          <CircularProgress />
-        </div> :
+        <Box style={{display:'flex', justifyContent:'center', alignItems:'center', width:'100%', height:'100%'}}>
+          <Spinner />
+        </Box> :
         <>
         {
           posts.length === 0 ? 
           (
-            <div style={{width:'100%', display:'flex', justifyContent:'center', alignItems:'center', backgroundColor:'#fff', marginTop:'1rem', borderRadius:'8px', padding:'2rem'}}>
+            <Box style={{width:'100%', display:'flex', justifyContent:'center', alignItems:'center', backgroundColor:'#fff', marginTop:'1rem', borderRadius:'8px', padding:'2rem'}}>
               <img style={{maxWidth:'100%'}}  src={noPostsFound} alt='no posts found' />
-            </div>
+            </Box>
           ):
           <>
           {
@@ -47,10 +48,10 @@ const Friend = ({id, bannerOrFriends}) => {
         </>
       }
       </Grid>
-      <div className="friend-paginate">
+      <Box className="friend-paginate">
         <Paginate friendId={id} page={page} setPage={setPage} component={'friend'} bannerOrFriends={bannerOrFriends} />
-      </div>
-  </div>
+      </Box>
+  </Box>
   )
 };
 

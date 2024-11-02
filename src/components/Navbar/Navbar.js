@@ -114,10 +114,17 @@ const Navbar = () => {
         setOpenNavbarModal(false);
         navigate('/')
     }
+
+    const navigateHome = ()=> { 
+        dispatch({type: CLEAR_FRIEND_STATE}); 
+        setBannerOrFriends('friends');
+        navigate('/');
+        window.location.reload();
+    }
     
   return (
     <AppBar className='appBar' position="static" color="inherit">
-        <div className='logo-container' onClick={()=>{ dispatch({type: CLEAR_FRIEND_STATE}); setBannerOrFriends('friends');navigate('/')}}>
+        <div className='logo-container' onClick={navigateHome}>
             <Typography  className='logo-heading'>Friends<span style={{color:'#ff6000'}}>Wall</span></Typography>
             <img className='logo-image' src={memories} alt='memories' />
         </div>
