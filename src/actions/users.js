@@ -91,19 +91,6 @@ export const unfriendAction = (id, loggedUserId) => async(dispatch) => {
     }
 }
 
-export const getFriendDetailsAction = (id,page) => async dispatch => {
-    try {
-        dispatch({type: START_LOADING});
-        const { data } = await api.getFriendDetails(id,page);
-        dispatch({type: GET_FRIEND_DETAILS, payload: data[0]});
-        dispatch({type: GET_FRIEND_POSTS, payload: data[1]})
-        dispatch({type: END_LOADING});
-
-    } catch (error) {
-        console.log(error.message)
-    }
-}
-
 export const userSearchAction = (searchQuery) => async (dispatch) => {
     try {
         dispatch({type: START_LOADING})
@@ -113,6 +100,15 @@ export const userSearchAction = (searchQuery) => async (dispatch) => {
         dispatch({type: END_LOADING})
     } catch (error) { 
         console.log(error.message)
+    }
+}
+
+export const getFriendDetails = (id) => async (dispatch) => {
+    try {
+        const { data } = await api.getFriendDetails(id);
+        dispatch({type: GET_FRIEND_DETAILS, payload: data});
+    } catch (error) {
+        console.log(error)
     }
 }
 

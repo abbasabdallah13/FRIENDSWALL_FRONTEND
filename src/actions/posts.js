@@ -10,7 +10,7 @@ export const getPost = (id) => async(dispatch) => {
         dispatch({type: END_LOADING});
 
     } catch (error) {
-        
+        console.log(error)
     }
 }
 
@@ -29,11 +29,21 @@ export const getPosts = () => async(dispatch) => {
     try {
         dispatch({type: START_LOADING})
         const { data } = await api.fetchPosts();
-        console.log(data);
         dispatch({type:FETCH_ALL_POSTS, payload: data})
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getFriendPosts = (id, pageNum) => async(dispatch) => {
+    try {
+        dispatch({type: START_LOADING})
+        const { data } = await api.getFriendPosts(id, pageNum)
+        console.log(data)
+        dispatch({type: GET_FRIEND_POSTS, payload: data })
         dispatch({type: END_LOADING})
     } catch (error) {
-        console.log(error.message)
+        console.log(error)
     }
 }
 

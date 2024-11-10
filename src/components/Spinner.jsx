@@ -3,6 +3,6 @@ import React from 'react'
 
 export default function Spinner() {
     return (
-        <CircularProgress color="inherit" size={'4rem'} />
+        <CircularProgress sx={{color: 'rgba(0,183,255, 1)'}} size={'4rem'} />
     )
 }

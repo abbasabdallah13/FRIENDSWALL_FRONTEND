@@ -304,14 +304,6 @@ opacity: 0;
    
 }
 
-.banner-or-friends-container{
-    height:87vh;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
 
 
 
@@ -320,33 +312,12 @@ opacity: 0;
         display: none !important;
     }
 
-    .banner-or-friends-container{
-        height:100%;
-    }
 
-    .friends-posts{
-        margin-top:1rem;
-    }
 }
 
-@media screen and (min-width: 480px) and (max-width: 600px) {
 
-    .banner-or-friends-container{
-        height: 100%;
-    }
 
-    .friends-posts{
-        margin-top:1rem;
-    }
-}
 
-@media screen and (min-width: 600px){
-    .banner-or-friends-container{
-        align-items: start;
-        height: 100%;
-
-    }
-}
 
 .appBar{
     border-radius: 15px;

@@ -1,6 +1,6 @@
 import { FETCH_POST, FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, COMMENT_ON_POST, START_LOADING, END_LOADING, DELETE_COMMENT, FETCH_USERS_BY_SEARCH, FETCH_POSTS_BY_SEARCH, GET_FRIEND_POSTS, CLEAR_FRIEND_STATE, FETCH_ALL_POSTS } from '../constants/actionTypes';
 
-const postsReducer = (state = { isLoading: false, allPosts:[],post: {comments:[]} ,posts: [], userPosts: [], users: []}, action) => {
+const postsReducer = (state = { isLoading: false, allPosts:[],post: {comments:[]}, posts: [], userPosts: [], users: [], friendPosts: [] }, action) => {
     switch (action.type) {
         case START_LOADING:
             return { ...state, isLoading: true };
@@ -19,7 +19,6 @@ const postsReducer = (state = { isLoading: false, allPosts:[],post: {comments:[]
                 currentPage: action.payload.currentPage,
                 numberOfPages: action.payload.numberOfPages,
                 users: [],
-
             }
         case FETCH_ALL_POSTS:
             return{
@@ -29,10 +28,8 @@ const postsReducer = (state = { isLoading: false, allPosts:[],post: {comments:[]
         case GET_FRIEND_POSTS:    
             return {
                 ...state, 
-                userPosts: action.payload.data,
-                currentPage: action.payload.currentPage,
+                friendPosts: action.payload.friendPosts,
                 numberOfPages: action.payload.numberOfPages,
-                users: []
             }
         case CLEAR_FRIEND_STATE:
             return {

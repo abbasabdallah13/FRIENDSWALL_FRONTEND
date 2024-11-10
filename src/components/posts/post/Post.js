@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { CardActions, CardContent, CardMedia, Button, Typography, ButtonBase, Grid, Card, Box } from "@mui/material"
+import { CardActions, CardMedia, Button, Typography, Card, Box } from "@mui/material"
 
 import moment from 'moment'
 
@@ -14,10 +14,11 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz"
 import { deletePost } from "../../../actions/posts";
 
 import LikeButton from "./LikeButton";
+import Grid2 from "@mui/material/Unstable_Grid2";
 
 
 
-const Post = ({post, setCurrentId, setCreateMemoryForm}) => {
+const Post = ({post, setCurrentId, setCreateMemoryForm, page}) => {
   const dispatch = useDispatch();
   let user;
 
@@ -63,12 +64,12 @@ const Post = ({post, setCurrentId, setCreateMemoryForm}) => {
   },[post])
 
   return (
-        <Grid item onClick={openPost} sx={{ borderRadius: '15px', position: 'relative', cursor: 'pointer', height: '20rem', width: '15rem'}} >
+        <Grid2 item size={3} onClick={openPost} sx={{ borderRadius: '15px', position: 'relative', cursor: 'pointer', height: '20rem', width: '15rem'}} >
           <Card sx={{height: '100%', width: '100%'}}>
           {
             confirmDeleteModal ? (
-              <Box onClick={(e)=>e.stopPropagation()} style={{display:'flex', flexDirection:'column', justifyContent:'center', height:'100%', width:'100%', zIndex:'9', backgroundColor:'#f6f8e7'}}> 
-                <Typography style={{margin:'0.5rem', textAlign:'center'}}>Are you sure you want to delete this post ?</Typography>
+              <Box onClick={(e)=>e.stopPropagation()} sx={{display:'flex', flexDirection:'column', justifyContent:'center', height:'100%', width:'100%', zIndex:'9', backgroundColor:'#f6f8e7'}}> 
+                <Typography sx={{margin:'0.5rem', textAlign:'center'}}>Are you sure you want to delete this post ?</Typography>
                 <Box sx={{display:'flex', justifyContent:'center', gap:'0.5rem', marginTop:'1rem'}}>
                   <Button variant="outlined" style={{border:'2px solid red'}} onClick={()=>deletePostFunction(post._id)}>Delete</Button>
                   <Button variant="contained" onClick={(e)=>{setConfirmDeleteModal(false)}}>Cancel</Button>
@@ -88,12 +89,12 @@ const Post = ({post, setCurrentId, setCreateMemoryForm}) => {
                   }
                     <CardMedia sx={{height: '7rem', width:'100%', paddingTop: '56.25%', backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: '1', backgroundBlendMode: 'darken' }} image={post.selectedFile} title={post.title} />
                     <Box sx={{padding: '0 4px 4px 4px', flex: '1', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: 'auto'}}>
-                      <Typography sx={{margin: '.3rem'}} variant="h6" gutterBottom>{post.title}</Typography>
+                      <Typography sx={{margin: '.3rem', fontSize: '1rem'}} variant="h6" gutterBottom>{post.title}</Typography>
                       <Typography variant="body2" color="textSecondary" component="p">{post.message.split(' ').splice(0, 20).join(' ')}</Typography>
-                      <Typography variant="overline" color="#b22a00">{post.tags.map(tag => `#${tag} `).join(' ').slice(0,25)}</Typography>
+                      <Typography variant="overline" color="#b22a00" sx={{fontSize: '10px'}}>{post.tags.map(tag => `#${tag} `).join(' ').slice(0,25)}</Typography>
                       <Box>
-                        <Typography variant="body2" textAlign={'right'} sx={{fontSize: '.6rem'}}>By {post.firstName} {post.lastName}</Typography>
-                        <Typography variant="body2" textAlign={'right'} sx={{fontSize: '.6rem'}}>{moment(post.createdAt).fromNow()}</Typography> 
+                        <Typography variant="body2" textAlign={'right'} sx={{fontSize: '8px'}}>By {post.firstName} {post.lastName}</Typography>
+                        <Typography variant="body2" textAlign={'right'} sx={{fontSize: '8px'}}>{moment(post.createdAt).fromNow()}</Typography> 
                       </Box>
                       {
                         cardActionsState && (
@@ -115,7 +116,7 @@ const Post = ({post, setCurrentId, setCreateMemoryForm}) => {
             )
           }
           </Card>
-        </Grid>
+        </Grid2>
     )
 };
 

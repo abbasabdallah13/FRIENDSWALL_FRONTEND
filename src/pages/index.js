@@ -64,28 +64,26 @@ export default function Component() {
             )
           }
     <Grow in>
-      <Container maxWidth='xl'>
             <Grid sx={{flexDirection: {xs: 'column-reverse', md: 'row'}}} container justifyContent="space-between" alignItems="stretch" spacing={3}>
               {
                 isLoading ? (
-                  <Grid item xs={12} md={9} >
-                    <Box sx={{display:'flex', justifyContent:'center', alignItems:'center', height: '100vh'}}>
-                      <Spinner />
-                    </Box>
+                  <Grid item xs={12} sm={4} md={9}  sx={{display:'flex', justifyContent:'center', alignItems:'center', height: '100%'}}>
+                    <Spinner />
                   </Grid>
                 ) : (searchByQuery === 'user') ? (
-                  <Grid item xs={12} md={9} >
+                  <Grid item xs={12} sm={4} md={9} >
                     <UserBannerContainer />
                   </Grid>
                 ) : (
-                  <Grid item xs={12} md={9} >
+                  <Grid item xs={12} sm={4} md={8} sx={{margin: '1rem 0 0 1rem'}} >
                     <Posts setScrollToTopButton={setScrollToTopButton} setCreateMemoryForm={setCreateMemoryForm} setCurrentId={setCurrentId}  />
                   </Grid>
                 )
               }
-             <Sidebar setSearchByQuery={setSearchByQuery} setCreateMemoryForm={setCreateMemoryForm} createMemoryForm={createMemoryForm} />
+              <Grid item xs={12} sm={8} md={3}>
+                <Sidebar setSearchByQuery={setSearchByQuery} setCreateMemoryForm={setCreateMemoryForm} createMemoryForm={createMemoryForm} />
+              </Grid>
             </Grid>
-      </Container>
     </Grow>
   </Box>
     

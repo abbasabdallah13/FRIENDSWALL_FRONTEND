@@ -1,7 +1,10 @@
 import axios from 'axios'
 
-const API = axios.create({ baseURL:'http://localhost:5000' })
+// const API = axios.create({ baseURL:'http://192.168.0.103:5000' })
+// const API = axios.create({ baseURL:'http://localhost:5000' })
 // const API = axios.create({ baseURL:'https://memories-backend-api.vercel.app' })
+const API = axios.create({ baseURL:'https://friendswall-backend.onrender.com' })
+
 
 API.interceptors.request.use(req => {
     if(localStorage.getItem('user')){
@@ -33,6 +36,8 @@ export const commentOnPost = (id, comment) => API.patch(`/posts/comment/${id}`, 
 
 export const deleteComment = (id, commentId) => API.patch(`posts/comment/delete/${id}`, commentId)
 
+export const getFriendPosts = (id, pageNum) => API.get(`/posts/friend/${id}?page=${pageNum}`) 
+
 export const signIn = formData => API.post('/users/signin', formData)
 
 export const signUp = formData => API.post('/users/signup', formData)
@@ -57,4 +62,5 @@ export const declineFriend = (id, loggedUser) => API.patch(`/users/user/decline/
 
 export const unfriend = (id, loggedUserId) => API.patch(`users/user/unfriend/${id}/${loggedUserId}`)
 
-export const getFriendDetails = (id, page) => API.get(`/users/friend/${id}?page=${page}`)
+export const getFriendDetails = (id) => API.get(`/users/friend/${id}`)
+

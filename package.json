@@ -25,6 +25,7 @@
     "bcryptjs": "^2.4.3",
     "gatsby": "^5.12.4",
     "jwt-decode": "^3.1.2",
+    "ngrok": "^5.0.0-beta.2",
     "query-string": "^8.1.0",
     "react": "^18.2.0",
     "react-country-flag": "^3.1.0",

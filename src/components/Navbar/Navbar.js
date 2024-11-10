@@ -6,7 +6,7 @@ import decode from 'jwt-decode';
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { AppBar, Button, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Notifications from '@mui/icons-material/Notifications';
@@ -123,7 +123,7 @@ const Navbar = () => {
     }
     
   return (
-    <AppBar className='appBar' position="static" color="inherit">
+    <Box className='appBar' sx={{backgroundColor: 'white'}}>
         <div className='logo-container' onClick={navigateHome}>
             <Typography  className='logo-heading'>Friends<span style={{color:'#ff6000'}}>Wall</span></Typography>
             <img className='logo-image' src={memories} alt='memories' />
@@ -188,7 +188,7 @@ const Navbar = () => {
                 </Button>
             )}
         </Toolbar>
-    </AppBar>
+    </Box>
   )
 };
 

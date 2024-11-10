@@ -1,4 +1,4 @@
-import { AppBar, Button, Grid, TextField } from '@mui/material';
+import { AppBar, Box, Button, Grid, TextField } from '@mui/material';
 import * as React from 'react'
 import Form from './Form/Form';
 import Paginate from './Pagination';
@@ -79,8 +79,7 @@ function Sidebar({setSearchByQuery, setCreateMemoryForm, createMemoryForm}) {
 
 
   return (
-    <>
-        <Grid item xs={12} sm={8} md={3} >
+        <Box>
             <Button onClick={()=> setOpenSearch((state) => !state)} style={{position:'relative', width:'100%',display:'flex', alignItems:'center', padding:'1rem', backgroundColor:'#f5f5f5', borderRadius: '8px', marginBottom: '0.7rem'}}>
                 Search
                 <span style={{cursor:'pointer', position:'absolute', right:'2rem'}}>
@@ -144,13 +143,12 @@ function Sidebar({setSearchByQuery, setCreateMemoryForm, createMemoryForm}) {
                       <Form currentId={currentId} setCurrentId={setCurrentId} />
                     )
                   }
-                  {
+                  {/* {
                     showPaginate && (
                       <Paginate page={page} component={'home'} />
                     )
-                  }
-        </Grid>
-    </>
+                  } */}
+        </Box>
   )
 }
 export default Sidebar
