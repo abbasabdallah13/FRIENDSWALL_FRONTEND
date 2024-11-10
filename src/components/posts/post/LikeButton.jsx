@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react";
-
+import React from "react";
 import { useDispatch } from "react-redux";
-
 import { Button } from "@mui/material";
-
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt'
 import ThumbUpAltOutlined from '@mui/icons-material/ThumbUpAltOutlined';
-
 import { likePost } from "../../../actions/posts";
 
 

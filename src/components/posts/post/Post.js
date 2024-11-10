@@ -1,22 +1,13 @@
 import React, { useEffect, useState } from "react";
-
 import { CardActions, CardMedia, Button, Typography, Card, Box } from "@mui/material"
-
 import moment from 'moment'
-
 import { navigate } from '@reach/router'
-
 import { useDispatch } from 'react-redux';
-
 import DeleteIcon from "@mui/icons-material/Delete"
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz"
-
 import { deletePost } from "../../../actions/posts";
-
 import LikeButton from "./LikeButton";
 import Grid2 from "@mui/material/Unstable_Grid2";
-
-
 
 const Post = ({post, setCurrentId, setCreateMemoryForm, page}) => {
   const dispatch = useDispatch();

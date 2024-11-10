@@ -28,12 +28,9 @@ function Sidebar({setSearchByQuery, setCreateMemoryForm, createMemoryForm}) {
     const [postSearch, setPostSearch] = React.useState('');
     const [tags, setTags] = React.useState([]);
     const [showPaginate, setShowPaginate] = React.useState(true);
+    const [pageNumber, setPageNumber] = React.useState(1)
 
-    const {currentId, setCurrentId, scrollToTopButton, setScrollToTopButton} = React.useContext(GlobalVariablesContext)
-
-  function updateURL() {
-      window.history.replaceState({}, '',`${window.location.pathname}?${params.toString()}`)
-  }
+    const { currentId, setCurrentId } = React.useContext(GlobalVariablesContext)
   
   const search = () => {
       setOpenSearch(false)
@@ -143,11 +140,11 @@ function Sidebar({setSearchByQuery, setCreateMemoryForm, createMemoryForm}) {
                       <Form currentId={currentId} setCurrentId={setCurrentId} />
                     )
                   }
-                  {/* {
+                  {
                     showPaginate && (
-                      <Paginate page={page} component={'home'} />
+                      <Paginate page={'home'} pageNumber={pageNumber} setPageNumber={setPageNumber} />
                     )
-                  } */}
+                  }
         </Box>
   )
 }

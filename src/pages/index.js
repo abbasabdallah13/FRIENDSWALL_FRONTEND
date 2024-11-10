@@ -1,22 +1,11 @@
 import * as React from "react"
-
-import { Container, Grow, Grid, Box } from '@mui/material'
-
-
+import { Grow, Grid, Box } from '@mui/material'
 import { useDispatch, useSelector } from "react-redux"
-
-import { navigate, useLocation } from '@reach/router'
-
+import { useLocation } from '@reach/router'
 import queryString from 'query-string'
-
-import { getPosts, getPostsPerPage, searchAction } from '../actions/posts'
-
 import Posts from "../components/posts/Posts";
 import UserBannerContainer from "../components/userBanner/UserBannerContainer";
 import ScrollToTop from "../components/ScrollToTop/ScrollToTop";
-
-
-import noPostsFound from '../assets/nopostsfound.png'
 import GlobalVariablesContext from "../context/globalVariables";
 import Sidebar from "../components/Sidebar"
 import Spinner from "../components/Spinner"
@@ -30,15 +19,9 @@ export default function Component() {
     const location = useLocation();
     const params = new URLSearchParams(window.location.search);
     
-    const { users } = useSelector(state => state.user)
-    const { posts, isLoading } = useSelector(state => state.posts)
+    const { isLoading } = useSelector(state => state.posts)
     
-    const page = queryString.parse(location.search).page || 1; 
-
-    React.useEffect(() => {
-      dispatch(getPosts())
-    }, [page]);
-    
+    const page = queryString.parse(location.search).page || 1;    
     
     const [createMemoryForm, setCreateMemoryForm] = React.useState(false);
 

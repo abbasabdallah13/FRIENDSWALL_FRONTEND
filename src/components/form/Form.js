@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
-
 import { TextField, Typography, Button, Paper } from "@mui/material";
-
 import FileBase from "react-file-base64"
-
 import { useDispatch, useSelector } from "react-redux"
-
 import { navigate } from '@reach/router';
-
 import { createPost, updatePost } from "../../actions/posts";
 
 

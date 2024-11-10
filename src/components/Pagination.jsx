@@ -1,16 +1,8 @@
 import React, { useEffect } from "react";
-
-import { navigate } from '@reach/router' 
-
 import { useDispatch, useSelector } from "react-redux";
-
 import { Box, Paper } from "@mui/material";
-
 import Pagination from "@mui/material/Pagination";
-import PaginationItem from "@mui/material/PaginationItem";
-
 import { getFriendPosts, getPostsPerPage } from "../actions/posts";
-
 
 const Paginate = ({ friendId, pageNumber, setPageNumber, page }) => {
   
@@ -35,7 +27,7 @@ const Paginate = ({ friendId, pageNumber, setPageNumber, page }) => {
           page={Number(pageNumber) || 1}  //current page
           variant="outlined"
           color="primary"
-          onChange={(e, value) => setPageNumber(value)}
+          onChange={(e, value) => {setPageNumber(value); window.scrollTo({top: '0', behavior: 'smooth'})}}
           sx={{display: 'flex', justifyContent: 'center'}}
         />
       </Box>

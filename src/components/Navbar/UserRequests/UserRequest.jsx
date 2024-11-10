@@ -1,9 +1,6 @@
 import React from "react";
-
-import { Button } from "@mui/material";
-
+import { Box, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-
 import { acceptFriendAction, declineFriendAction } from "../../../actions/users";
 
 const UserRequest = ({requestor, last}) => {    
@@ -20,18 +17,18 @@ const UserRequest = ({requestor, last}) => {
     }
 
   return (
-    <div style={{marginTop:'0rem', display:'flex', gap:'0.5rem', borderBottom: !last?'1px solid #e8e8e8':'0', padding:'0.5rem'}}>
-        <div style={{padding:'0.3rem', display:'flex', alignItems:'center'}}>
+    <Box sx={{marginTop:'0rem', display:'flex', gap:'0.5rem', borderBottom: !last?'1px solid #e8e8e8':'0', padding:'0.5rem'}}>
+        <Box sx={{padding:'0.3rem', display:'flex', alignItems:'center'}}>
             <img src={requestor.picture} style={{borderRadius:'50%', width:'4rem', height:'4rem'}} />
-        </div>
-        <div style={{display:'flex', flexDirection:'column'}}>
+        </Box>
+        <Box sx={{display:'flex', flexDirection:'column'}}>
             <h3>{requestor?.firstName} {requestor?.lastName}</h3>
-            <div style={{display:'flex', gap:'0.5rem'}}>
-                <Button style={{backgroundColor: 'green', color:'white', height:'1.5rem'}} onClick={acceptFriendRequest}>Accept</Button>
-                <Button style={{backgroundColor: 'red', color:'white', height:'1.5rem'}} onClick={declineFriendRequest}>Decline</Button>
-            </div>
-        </div>
-    </div>
+            <Box sx={{display:'flex', gap:'0.5rem'}}>
+                <Button sx={{backgroundColor: 'green', color:'white', height:'1.5rem'}} onClick={acceptFriendRequest}>Accept</Button>
+                <Button sx={{backgroundColor: 'red', color:'white', height:'1.5rem'}} onClick={declineFriendRequest}>Decline</Button>
+            </Box>
+        </Box>
+    </Box>
   )
 };
 

@@ -39,7 +39,6 @@ export const getFriendPosts = (id, pageNum) => async(dispatch) => {
     try {
         dispatch({type: START_LOADING})
         const { data } = await api.getFriendPosts(id, pageNum)
-        console.log(data)
         dispatch({type: GET_FRIEND_POSTS, payload: data })
         dispatch({type: END_LOADING})
     } catch (error) {

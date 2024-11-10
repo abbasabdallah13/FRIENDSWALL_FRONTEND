@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Paper, Button, Box } from '@mui/material';
+import { Paper } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { navigate, useLocation } from '@reach/router';
 import {  deletePost, getPost  } from '../../actions/posts.js'
 import ScrollToTop from "../../components/ScrollToTop/ScrollToTop.jsx";
-import RecommendedPosts from "../../components/RecommendedPosts.jsx";
 import Details from "../../components/Details.jsx";
 import GlobalVariablesContext from "../../context/globalVariables.js";
 import PostOptions from "../../components/posts/post/PostOptions.jsx";
@@ -23,7 +22,6 @@ export default function Component() {
   const { allPosts, isLoading } = useSelector( state => state.posts )
   const { scrollToTopButton, setScrollToTopButton, currentId, setCurrentId } = useContext(GlobalVariablesContext)
  
-  const [recommendedPosts, setRecommendedPosts] = useState([]); 
   const [postModal, setPostModal] = useState(false);
   const [deletePostModal, setDeletePostModal] = useState(false);
   const [editPostModal, setEditPostModal] = useState(false);
@@ -43,19 +41,6 @@ export default function Component() {
     dispatch(getPost(id))
   }, [id]);
   
-  useEffect(() => {
-    let recommendedPosts = [];
-    for(let i=0;i<allPosts?.length;i++){
-      for(let j=0;j<allPosts[i]?.tags?.length;j++){
-        if(post?.tags?.indexOf(allPosts[i].tags[j]) !== -1){
-          recommendedPosts.push(allPosts[i]);
-          break;
-        }
-      }
-    }
-    recommendedPosts = recommendedPosts.filter(post => post._id !== id);
-    setRecommendedPosts(recommendedPosts.length>0?recommendedPosts:post)
-  }, [currentId]);
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -104,12 +89,7 @@ export default function Component() {
               )
             }
             <PostOptions postCreator={postCreator} postModal={postModal} setPostModal={setPostModal} editPostModal={editPostModal} setEditPostModal={setEditPostModal} deletePostModal={deletePostModal} setDeletePostModal={setDeletePostModal} anywhereClick={anywhereClick} currentId={currentId} setCurrentId={setCurrentId} id={id} />          
-            <Details postCreator={postCreator} id={id} user={user} post={post} deletePostFunc={deletePostFunc} />
-            {
-              recommendedPosts?.length && (
-                <RecommendedPosts recommendedPosts={recommendedPosts} />
-              )
-            }
+            <Details postCreator={postCreator} id={id} user={user} post={post} deletePostFunc={deletePostFunc} />s
           </Paper>
         )
   )

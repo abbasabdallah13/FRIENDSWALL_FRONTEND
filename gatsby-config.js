@@ -6,7 +6,7 @@ module.exports = {
     siteUrl: 'http://localhost:8000',
   },
   flags: {
-    DEV_SSR: false,
+    DEV_SSR: true,
   },
   plugins: [],
   

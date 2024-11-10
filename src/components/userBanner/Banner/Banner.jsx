@@ -1,19 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import ReactCountryFlag from "react-country-flag"
-
 import { Button, Divider, Zoom } from "@mui/material"
-
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz"
 import PersonAdd from '@mui/icons-material/PersonAdd'
-
 import { addFriendAction, unfriendAction, unsendFriendRequest } from "../../../actions/users";
-
 import { getCountryFlag } from "../../../utils/utils";
-
 
 const Banner = ({user, userInfo, addFriendBtn, component, setBannerOrFriends,style, className}) => {
     const loggedUser = useSelector(state => state.user.loggedUser);

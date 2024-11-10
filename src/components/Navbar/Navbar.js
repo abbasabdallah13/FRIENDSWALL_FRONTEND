@@ -124,15 +124,15 @@ const Navbar = () => {
     
   return (
     <Box className='appBar' sx={{backgroundColor: 'white'}}>
-        <div className='logo-container' onClick={navigateHome}>
-            <Typography  className='logo-heading'>Friends<span style={{color:'#ff6000'}}>Wall</span></Typography>
+        <Box className='logo-container' onClick={navigateHome}>
+            <Typography  className='logo-heading'>Friends<span sx={{color:'#ff6000'}}>Wall</span></Typography>
             <img className='logo-image' src={memories} alt='memories' />
-        </div>
+        </Box>
         <Toolbar className='navbar-toolbar'>
             {
                 Object.keys(localStorageUser).length > 0 ? (
-                <div style={{display:'flex', justifyContent:'end', alignItems:'center', position:'relative'}}>
-                    <div style={{display: 'flex', borderRadius: '8px', gap: '0.5rem', marginRight: '0.5rem'}}>      
+                <Box sx={{display:'flex', justifyContent:'end', alignItems:'center', position:'relative'}}>
+                    <Box sx={{display: 'flex', borderRadius: '8px', gap: '0.5rem', marginRight: '0.5rem'}}>      
                         <button 
                             className='notifications-button' 
                             onClick={()=>{ setFriendRequestModal((state) => !state); setOpenNavbarModal(false) }}
@@ -142,46 +142,46 @@ const Navbar = () => {
                         </button>
                         {
                             friendRequestModal && (
-                                <div ref={navbarModalRef} style={{position:'absolute', right:'0rem', top:'3.2rem', backgroundColor:'white', zIndex:'5', borderRadius:'18px', border:'1px solid black'}}>
+                                <Box ref={navbarModalRef} sx={{position:'absolute', right:'0rem', top:'3.2rem', backgroundColor:'white', zIndex:'5', borderRadius:'18px', border:'1px solid black'}}>
                                     {
                                         user?.requests.map((requestor,i, array) => (
                                             <UserRequest requestor={requestor} last={i===array.length-1} />
                                         ))
                                     }
-                                </div>
+                                </Box>
                             )
                         }
                         <button className='notifications-button'><span style={{borderRadius:'50%', backgroundColor:'red', width:'0.9rem', height:'0.9rem', position:'absolute', top:'-0.3rem', right:'-0.2rem', color:'white', display:'flex', justifyContent:'center', alignItems:'center'}}>0</span><Notifications fontSize='small'/></button>
-                    </div>
-                    <div 
-                        style={{width: '100%', cursor: 'pointer', display:'flex', alignItems:'center', justifyContent:'end'}} 
+                    </Box>
+                    <Box 
+                        sx={{width: '100%', cursor: 'pointer', display:'flex', alignItems:'center', justifyContent:'end'}} 
                         onClick={() => {setOpenNavbarModal(true)}}
                     >
                         <img src={user?.picture} className='navbar-user-pic' alt={user?.name} />
                         <ExpandMoreIcon />
-                    </div>
+                    </Box>
                     {
                         openNavbarModal && (
                             <>
-                                <div className='navbar-modal' ref={navbarModalRef}>
+                                <Box className='navbar-modal' ref={navbarModalRef}>
                                     <Typography className='navbar-username'>
                                         {user?.firstName} {user?.lastName}
                                     </Typography>
-                                    <Button className="navbar-button" onClick={()=>{goToHome()}}><Home /> <p style={{width: '95%'}}>Home</p></Button>
-                                    <Button className="navbar-button" onClick={()=>{goToProfile()}}><AccountCircle /> <p style={{width: '95%'}}>Profile</p></Button>
-                                    <Button className="navbar-button" onClick={()=>{goToFriendsPage()}}><PeopleOutline /> <p style={{width: '95%'}}>Friends</p></Button>
-                                    <Button className="navbar-button" onClick={()=>{goToUserSettings(user?._id)}}><SettingsApplications /><p style={{width: '95%'}}>Account Settings</p></Button>
-                                    <div style={{display:'flex', justifyContent:'end'}}>
-                                        <Button style={{height:'1.6rem', width:'4.5rem', marginTop:'1rem'}}  variant="contained" color='secondary' onClick={logout}>
+                                    <Button className="navbar-button" onClick={()=>{goToHome()}}><Home /> <p sx={{width: '95%'}}>Home</p></Button>
+                                    <Button className="navbar-button" onClick={()=>{goToProfile()}}><AccountCircle /> <p sx={{width: '95%'}}>Profile</p></Button>
+                                    <Button className="navbar-button" onClick={()=>{goToFriendsPage()}}><PeopleOutline /> <p sx={{width: '95%'}}>Friends</p></Button>
+                                    <Button className="navbar-button" onClick={()=>{goToUserSettings(user?._id)}}><SettingsApplications /><p sx={{width: '95%'}}>Account Settings</p></Button>
+                                    <Box sx={{display:'flex', justifyContent:'end'}}>
+                                        <Button sx={{height:'1.6rem', width:'4.5rem', marginTop:'1rem'}}  variant="contained" color='secondary' onClick={logout}>
                                             Logout
                                         </Button>
-                                    </div>
-                                </div>
+                                    </Box>
+                                </Box>
                             </>
                         )
                     }
 
-                </div>
+                </Box>
             ) : (
                 <Button className="sign-in-btn" onClick={() => navigate('/auth/')} variant='contained' color='primary'>
                     Sign in
