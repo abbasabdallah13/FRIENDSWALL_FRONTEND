@@ -58,12 +58,12 @@ export default function Component() {
                     <UserBannerContainer />
                   </Grid>
                 ) : (
-                  <Grid item xs={12} sm={4} md={8} sx={{margin: '1rem 0 0 1rem'}} >
+                  <Grid item xs={12} sm={12} md={8} sx={{margin: '1rem 0 0 1rem'}} >
                     <Posts setScrollToTopButton={setScrollToTopButton} setCreateMemoryForm={setCreateMemoryForm} setCurrentId={setCurrentId}  />
                   </Grid>
                 )
               }
-              <Grid item xs={12} sm={8} md={3}>
+              <Grid item xs={12} sm={12} md={3}>
                 <Sidebar setSearchByQuery={setSearchByQuery} setCreateMemoryForm={setCreateMemoryForm} createMemoryForm={createMemoryForm} />
               </Grid>
             </Grid>

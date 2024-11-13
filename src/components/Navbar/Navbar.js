@@ -125,7 +125,7 @@ const Navbar = () => {
   return (
     <Box className='appBar' sx={{backgroundColor: 'white'}}>
         <Box className='logo-container' onClick={navigateHome}>
-            <Typography  className='logo-heading'>Friends<span sx={{color:'#ff6000'}}>Wall</span></Typography>
+            <Typography className='logo-heading'>Friends<span style={{color:'#ff6000'}}>Wall</span></Typography>
             <img className='logo-image' src={memories} alt='memories' />
         </Box>
         <Toolbar className='navbar-toolbar'>

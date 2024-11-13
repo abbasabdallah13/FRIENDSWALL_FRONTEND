@@ -62,9 +62,7 @@ export default function Component() {
   function useOutsideClicker(ref) {
     useEffect(() => {
       function handleClickOutside(event) {
-        console.log(event.target)
         if (ref.current && !ref.current.contains(event.target)) {
-          console.log(ref.current.contains(event.target))
            setDeletePostModal(false);
            setPostModal(false);
            setEditPostModal(false)

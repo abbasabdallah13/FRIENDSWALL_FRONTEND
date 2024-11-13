@@ -48,7 +48,6 @@ export default function Component() {
     const page = query.get('page') || 1; 
     
     useEffect(() => {
-        console.log(location)
       dispatch(getPosts())
     }, [page]);
     

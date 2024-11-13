@@ -52,7 +52,6 @@ export default function Component() {
   
 
   useEffect(() => {
-    console.log(id)
     const obj1Props = Object.keys(user);
     const obj2Props = Object.keys(userInfo);
     for(let i=0;i<obj1Props.length;i++){
@@ -73,7 +72,6 @@ export default function Component() {
     setUserInfo({})
     dispatch(getUserInfo(id))
     setUserInfo(user)
-    console.log(location)
   }, [id]);
 
   useEffect(() => {

@@ -31,7 +31,6 @@ const Banner = ({user, userInfo, addFriendBtn, component, setBannerOrFriends,sty
     }
 
     useEffect(() => {
-      console.log(user)
         if(addFriendBtn){
           const friends = user?.friends?.map(friend => friend._id);
           const ids = user?.requests?.map(request => request._id);
