@@ -11,7 +11,7 @@ import { navigate, useLocation } from '@reach/router'
 import { getPostsPerPage, postsSearchAction, searchAction } from '../actions/posts';
 import GlobalVariablesContext from '../context/globalVariables';
 import { userSearchAction } from '../actions/users';
-import Form from './Form/Form';
+import Form from './Form.jsx';
 
 function Sidebar({setSearchByQuery, setCreateMemoryForm, createMemoryForm}) {
     const dispatch = useDispatch();
