@@ -1,6 +1,5 @@
 import { AppBar, Box, Button, Grid, TextField } from '@mui/material';
 import * as React from 'react'
-import Form from './Form/Form';
 import Paginate from './Pagination';
 import ArrowDropDownCircle from '@mui/icons-material/ArrowDropDownCircle'
 import Cancel from '@mui/icons-material/CancelOutlined'
@@ -12,6 +11,7 @@ import { navigate, useLocation } from '@reach/router'
 import { getPostsPerPage, postsSearchAction, searchAction } from '../actions/posts';
 import GlobalVariablesContext from '../context/globalVariables';
 import { userSearchAction } from '../actions/users';
+import Form from './Form/Form';
 
 function Sidebar({setSearchByQuery, setCreateMemoryForm, createMemoryForm}) {
     const dispatch = useDispatch();

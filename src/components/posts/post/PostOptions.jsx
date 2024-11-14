@@ -1,8 +1,8 @@
 import React from 'react'
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz"
 import Cancel from "@mui/icons-material/Cancel"
-import Form from "../../Form/Form.js";
 import { Box, Button, Typography } from '@mui/material';
+import Form from '../../Form/Form';
 
 
 function PostOptions({postCreator, postModal, setPostModal, editPostModal, setEditPostModal, deletePostModal, setDeletePostModal, anywhereClick, currentId, setCurrentId, deletePostFunc, id}) {

@@ -16,7 +16,7 @@ import { createOrGetUser } from "../../utils/utils";
 import CountrySelect from "../../components/CountrySelect"
 import Spinner from "../../components/Spinner";
 
-export default function Component() {
+export default function Index() {
     const initialState = {
         firstName: '',
         lastName: '',
