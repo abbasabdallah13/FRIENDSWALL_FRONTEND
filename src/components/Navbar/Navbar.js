@@ -94,7 +94,6 @@ const Navbar = () => {
 
     const navigateHome = ()=> { 
         navigate('/');
-        window.location.reload();
     }
     
   return (
