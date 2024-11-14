@@ -78,7 +78,9 @@ export default function Component() {
 
   return (
       isLoading ? 
-        <Spinner />
+        <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%'}}>
+          <Spinner />
+        </Box>
       : (
           <Paper sx={{position:'relative', padding: '20px', borderRadius: '15px', width:'100%', height: deletePostModal || editPostModal ? '100vh' : '', overflow: deletePostModal || editPostModal ? 'hidden' : ''}} elevation={6}>
             {
