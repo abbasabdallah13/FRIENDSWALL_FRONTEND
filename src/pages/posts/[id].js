@@ -87,7 +87,7 @@ export default function Component() {
               )
             }
             <PostOptions postCreator={postCreator} postModal={postModal} setPostModal={setPostModal} editPostModal={editPostModal} setEditPostModal={setEditPostModal} deletePostModal={deletePostModal} setDeletePostModal={setDeletePostModal} anywhereClick={anywhereClick} currentId={currentId} setCurrentId={setCurrentId} id={id} />          
-            <Details postCreator={postCreator} id={id} user={user} post={post} deletePostFunc={deletePostFunc} />s
+            <Details postCreator={postCreator} id={id} user={user} post={post} deletePostFunc={deletePostFunc} />
           </Paper>
         )
   )
