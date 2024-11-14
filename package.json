@@ -24,6 +24,7 @@
     "axios": "^1.5.0",
     "bcryptjs": "^2.4.3",
     "gatsby": "^5.12.4",
+    "gatsby-plugin-manifest": "^5.14.0",
     "jwt-decode": "^3.1.2",
     "ngrok": "^5.0.0-beta.2",
     "query-string": "^8.1.0",
