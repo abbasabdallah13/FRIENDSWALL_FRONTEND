@@ -15,18 +15,16 @@ const Post = ({post, setCurrentId, setCreateMemoryForm, page}) => {
   const [user, setUser] = useState(null)
   
   useEffect(()=>{
+    console.log('logging')
     let localStorageUser = JSON.parse(localStorage.getItem('user'));
     setUser(localStorageUser);
-  },[])
-
-  useEffect(()=>{
-    if(user?.result._id) setCardActionsState(true);
-    if(post?.likes?.indexOf(user?.result?._id || user?.result?.googleId) === -1){
+    if(localStorageUser?.result._id) setCardActionsState(true);
+    if(post?.likes?.indexOf(localStorageUser?.result?._id || localStorageUser?.result?.googleId) === -1){
         setLikeMsg('Like');
     }else{
         setLikeMsg('Unlike');
     }
-  },[user, post])
+  },[post])
 
   const [confirmDeleteModal, setConfirmDeleteModal] = useState(false);
   const [cardActionsState, setCardActionsState] = useState(false);

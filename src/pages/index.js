@@ -1,8 +1,6 @@
 import * as React from "react"
 import { Grow, Grid, Box } from '@mui/material'
-import { useDispatch, useSelector } from "react-redux"
-import { useLocation } from '@reach/router'
-import queryString from 'query-string'
+import { useSelector } from "react-redux"
 import Posts from "../components/posts/Posts";
 import UserBannerContainer from "../components/userBanner/UserBannerContainer";
 import ScrollToTop from "../components/ScrollToTop/ScrollToTop";

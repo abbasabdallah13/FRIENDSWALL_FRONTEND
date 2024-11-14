@@ -65,7 +65,7 @@ const Navbar = () => {
         setLocalStorageUser({})
     }
         
-    }, [location, dispatch, logout]);
+    }, [location]);
     
     const goToHome = () => {
         navigate('/')
