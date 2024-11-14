@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Paper } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { navigate, useLocation } from '@reach/router';
 import {  deletePost, getPost  } from '../../actions/posts.js'
