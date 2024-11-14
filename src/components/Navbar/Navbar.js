@@ -1,50 +1,39 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
-
+import React, { useEffect, useState, useRef } from "react";
 import { navigate, useLocation } from '@reach/router'
-
 import decode from 'jwt-decode';
-
 import { useDispatch, useSelector } from "react-redux";
-
-import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
-
+import { Box, Button, Toolbar, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Notifications from '@mui/icons-material/Notifications';
 import SettingsApplications from '@mui/icons-material/SettingsApplications';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import PeopleOutline from '@mui/icons-material/PeopleOutline';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Home from '@mui/icons-material/Home';
-
-import { CLEAR_FRIEND_STATE, CLEAR_STATE } from "../../constants/actionTypes";
+import { CLEAR_STATE } from "../../constants/actionTypes";
 import { getPostsPerPage } from "../../actions/posts";
-import { getUserInfo, getUserInfoByEmail } from "../../actions/users";
-
+import { getUserInfoByEmail } from "../../actions/users";
 import UserRequest from "./UserRequests/UserRequest";
-
 import memories from '../../assets/memories.png'
-
 import './index.css'
-import GlobalVariablesContext from "../../context/globalVariables"
 
  
 const Navbar = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const navbarModalRef = useRef(null);
+    const userClickRef = useRef(null)
 
     const user = useSelector(state => state.user.loggedUser);
-    const { setBannerOrFriends } = useContext(GlobalVariablesContext)
 
     const [friendRequestModal, setFriendRequestModal] = useState(false);
     const [openNavbarModal, setOpenNavbarModal] = useState(false);
     const [localStorageUser, setLocalStorageUser] = useState({})
+    
 
-
-    function useOutsideAlerter(ref) {
+    function useOutsideAlerter(refsArr) {
         useEffect(() => {
           function handleClickOutside(event) {
-            if (ref.current && !ref.current.contains(event.target)) {
+            if (refsArr[0].current && !refsArr[0].current.contains(event.target) && !refsArr[1].current.contains(event.target)) {
                     setOpenNavbarModal(false)
                     setFriendRequestModal(false)
             }
@@ -53,9 +42,9 @@ const Navbar = () => {
           return () => {
             document.removeEventListener("mousedown", handleClickOutside);
           };
-        }, [ref]);
+        }, [refsArr]);
       }
-      useOutsideAlerter(navbarModalRef);    
+      useOutsideAlerter([navbarModalRef, userClickRef]);    
     
     useEffect(() => {
 
@@ -76,37 +65,25 @@ const Navbar = () => {
         setLocalStorageUser({})
     }
         
-    }, [location]);
+    }, [location, dispatch, logout]);
     
     const goToHome = () => {
-        navigate('/posts/')
+        navigate('/')
         setOpenNavbarModal(false)
-        dispatch({type: CLEAR_FRIEND_STATE})
-        setBannerOrFriends('friends');
-    }
-
-    const goToProfile = () => {
-        navigate('/friends/');
-        setOpenNavbarModal(false)
-        dispatch({type: CLEAR_FRIEND_STATE})
-        setBannerOrFriends(user);
     }
 
     const goToFriendsPage = () => {
         navigate('/friends/');
         setOpenNavbarModal(false)
-        dispatch({type: CLEAR_FRIEND_STATE})
-        setBannerOrFriends('friends');
     }
 
     const goToUserSettings = (id) => {
         navigate(`/user/${id}`)
         setOpenNavbarModal(false)
-        dispatch({type: CLEAR_FRIEND_STATE})
-        setBannerOrFriends('friends');
     }
 
-    const logout = () => {
+    function logout() {
+        localStorage.clear();
         dispatch({ type: 'LOGOUT'})
         dispatch({type: CLEAR_STATE})
         dispatch(getPostsPerPage(1))
@@ -116,8 +93,6 @@ const Navbar = () => {
     }
 
     const navigateHome = ()=> { 
-        dispatch({type: CLEAR_FRIEND_STATE}); 
-        setBannerOrFriends('friends');
         navigate('/');
         window.location.reload();
     }
@@ -155,29 +130,27 @@ const Navbar = () => {
                     </Box>
                     <Box 
                         sx={{width: '100%', cursor: 'pointer', display:'flex', alignItems:'center', justifyContent:'end'}} 
-                        onClick={() => {setOpenNavbarModal(true)}}
+                        onClick={() => {setOpenNavbarModal((state) => !state)}}
+                        ref={userClickRef}
                     >
                         <img src={user?.picture} className='navbar-user-pic' alt={user?.name} />
                         <ExpandMoreIcon />
                     </Box>
                     {
                         openNavbarModal && (
-                            <>
                                 <Box className='navbar-modal' ref={navbarModalRef}>
                                     <Typography className='navbar-username'>
                                         {user?.firstName} {user?.lastName}
                                     </Typography>
-                                    <Button className="navbar-button" onClick={()=>{goToHome()}}><Home /> <p sx={{width: '95%'}}>Home</p></Button>
-                                    <Button className="navbar-button" onClick={()=>{goToProfile()}}><AccountCircle /> <p sx={{width: '95%'}}>Profile</p></Button>
-                                    <Button className="navbar-button" onClick={()=>{goToFriendsPage()}}><PeopleOutline /> <p sx={{width: '95%'}}>Friends</p></Button>
-                                    <Button className="navbar-button" onClick={()=>{goToUserSettings(user?._id)}}><SettingsApplications /><p sx={{width: '95%'}}>Account Settings</p></Button>
+                                    <Button sx={{display: 'flex', alignItems: 'center', gap: '10px'}} onClick={()=>{goToHome()}}><Home /> Home</Button>
+                                    <Button sx={{display: 'flex', alignItems: 'center', gap: '10px'}} onClick={()=>{goToFriendsPage()}}><PeopleOutline /> Friends</Button>
+                                    <Button sx={{display: 'flex', alignItems: 'center', gap: '10px'}} onClick={()=>{goToUserSettings(user?._id)}}><SettingsApplications />Profile Settings</Button>
                                     <Box sx={{display:'flex', justifyContent:'end'}}>
-                                        <Button sx={{height:'1.6rem', width:'4.5rem', marginTop:'1rem'}}  variant="contained" color='secondary' onClick={logout}>
+                                        <Button sx={{height:'1.6rem', width:'4.5rem', marginTop:'1rem'}}  variant="outlined" color="error" onClick={logout}>
                                             Logout
                                         </Button>
                                     </Box>
                                 </Box>
-                            </>
                         )
                     }
 

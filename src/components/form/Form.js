@@ -11,25 +11,30 @@ const Form = ({currentId, setCurrentId, setEditPostModal}) => {
   const dispatch = useDispatch();
 
   const post = useSelector(state => currentId ? state?.posts?.posts?.find(p => p._id === currentId) : null)
+
+  const [user, setUser] = useState(null)
   
-  const user = JSON.parse(localStorage.getItem('user'));
+  useEffect(() => {
+    const localStorageUser = JSON.parse(localStorage.getItem('user'));
+    setUser(localStorageUser);
+  }, [])
+  
   
   const [postData, setPostData] = useState({
     title: '', message: '', tags:'', selectedFile: '', creator: '', createdAt: '', comments:[]
   })
-
-
+  
+  
   useEffect(() => {
     if(post){
       setPostData(post)
     }
   }, [post]);
   
-
+  
   const handleSubmit = (e) => {
-    e.preventDefault(); //to not get a refresh in the browser
+    e.preventDefault(); 
     
-     
     if(currentId === 0){
       dispatch(createPost({...postData, firstName: user?.result?.firstName, lastName:user?.result?.lastName, creator: user?.result?._id, createdAt: new Date().toISOString(), tags: postData.tags.map(tag => tag.trim()) }, navigate))
       localStorage.setItem('openedPost',JSON.stringify({...postData, firstName: user?.result?.firstName, lastName:user?.result?.lastName, creator: user?.result?._id, createdAt: new Date().toISOString(), tags: postData.tags.map(tag => tag.trim()) }))
@@ -42,8 +47,8 @@ const Form = ({currentId, setCurrentId, setEditPostModal}) => {
     clear()
 
   }
-
-
+  
+  
   const clear = () => {
     setCurrentId(0);
     setPostData({

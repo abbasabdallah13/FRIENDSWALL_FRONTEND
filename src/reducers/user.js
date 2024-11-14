@@ -1,4 +1,4 @@
-import { ADD_FRIEND, GET_USER_INFO, UPDATE_USER_INFO, GET_REQUESTOR_INFO, ACCEPT_FRIEND, DECLINE_FRIEND,CLEAR_STATE, GET_FRIEND_DETAILS, CLEAR_FRIEND_STATE, UNFRIEND, GET_USER_INFO_BY_EMAIL, FETCH_USERS_BY_SEARCH } from "../constants/actionTypes"
+import { ADD_FRIEND, GET_USER_INFO, UPDATE_USER_INFO, GET_REQUESTOR_INFO, ACCEPT_FRIEND, DECLINE_FRIEND,CLEAR_STATE, GET_FRIEND_DETAILS, UNFRIEND, GET_USER_INFO_BY_EMAIL, FETCH_USERS_BY_SEARCH } from "../constants/actionTypes"
 
 const userReducer = (state = {loggedUser: {}, user: {}, requestor: {}, friendDetails: {}},action) => {
     switch(action.type){
@@ -20,8 +20,6 @@ const userReducer = (state = {loggedUser: {}, user: {}, requestor: {}, friendDet
             return {...state, loggedUser: action.payload}
         case CLEAR_STATE:
             return {...state, loggedUser: {}}
-        case CLEAR_FRIEND_STATE: 
-            return {...state, friend:{}}
         case FETCH_USERS_BY_SEARCH:
             return {
                 ...state,

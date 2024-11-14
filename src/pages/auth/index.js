@@ -26,10 +26,9 @@ export default function Component() {
         country: ''
     }
 
-    let user;
-
+    
     useEffect(()=>{
-        user = JSON.parse(localStorage.getItem('user'));
+        let localStorageUser = JSON.parse(localStorage.getItem('user'));
     },[])
 
     const dispatch = useDispatch()
@@ -66,7 +65,7 @@ export default function Component() {
 
     const googleSuccess = async (res) => {
         const decoded = createOrGetUser(res);
-        const { family_name, given_name, picture , email, sub } = await decoded;
+        const { family_name, given_name, picture , email } = await decoded;
         try {
             dispatch(googleSignInAction({ googleResponseObject: {family_name, given_name, picture , email } }, navigate))
         } catch (error) {
@@ -105,8 +104,8 @@ export default function Component() {
                                     {
                                         isSignUp && (
                                             <>
-                                                <Input name='firstName' label='First Name' handleChange={handleChange} autoFocus  />
-                                                <Input name='lastName' label='Last Name' handleChange={handleChange} autoFocus  />
+                                                <Input name='firstName' label='First Name' handleChange={handleChange}  />
+                                                <Input name='lastName' label='Last Name' handleChange={handleChange} />
                                                 <CountrySelect style={{height:'3rem', margin:'0.5rem 0', padding:'0 0.5rem'}}  userInfo={formData} setUserInfo={setFormData}  />
                                             </>
                                         )

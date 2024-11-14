@@ -16,8 +16,6 @@ import { userSearchAction } from '../actions/users';
 function Sidebar({setSearchByQuery, setCreateMemoryForm, createMemoryForm}) {
     const dispatch = useDispatch();
     const location = useLocation();
-    const params = new URLSearchParams(window.location.search);
-
 
     const page = queryString.parse(location.search).page || 1; 
 

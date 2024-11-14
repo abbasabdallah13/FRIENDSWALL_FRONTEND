@@ -7,10 +7,9 @@ const API = axios.create({ baseURL:'https://friendswall-backend.onrender.com' })
 
 
 API.interceptors.request.use(req => {
-    if(localStorage.getItem('user')){
-        req.headers.authorization = `Bearer ${JSON.parse(localStorage.getItem('user')).token}`;
-    }
-
+        if(localStorage.getItem('user')){
+            req.headers.authorization = `Bearer ${JSON.parse(localStorage.getItem('user')).token}`;
+        }
     return req;
 })
 

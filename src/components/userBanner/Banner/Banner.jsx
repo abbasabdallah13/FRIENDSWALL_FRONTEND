@@ -10,7 +10,13 @@ import { getCountryFlag } from "../../../utils/utils";
 
 const Banner = ({user, userInfo, addFriendBtn, component, setBannerOrFriends,style, className}) => {
     const loggedUser = useSelector(state => state.user.loggedUser);
-    let localStorageUser = JSON.parse(localStorage.getItem('user'));  
+    const [localStorageUser, setLocalStorageUser] = useState(null)
+
+    useEffect(() => {
+      let lcUser = JSON.parse(localStorage.getItem('user'));  
+      setLocalStorageUser(lcUser);
+    }, [])
+    
     
 
     const dispatch = useDispatch();
@@ -44,7 +50,7 @@ const Banner = ({user, userInfo, addFriendBtn, component, setBannerOrFriends,sty
             setBannerButton('Request Sent');
           }
         }
-    }, []);
+    }, [addFriendBtn, loggedUser?._id, user?.friends, user?.requests]);
 
     const unfriendUser = () => {
       dispatch(unfriendAction(user?._id, loggedUser?._id));

@@ -83,23 +83,6 @@ font-size: 0.7rem !important;
     background-color:#e0e0e0;
 }
 
-.navbar-button{
-    width:100%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-size:1rem;
-}
-
-.navbar-button-span{
-    border-radius:50%;
-    border:1px solid black;
-    padding:0.3rem;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin-right:1rem;
-}
 
 @media screen and (max-width: 480px) {
     .logo-heading{

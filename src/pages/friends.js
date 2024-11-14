@@ -38,7 +38,7 @@ export default function Component () {
         setScrollToTopButton(false);
       }
     })
-  }, []);
+  }, [setScrollToTopButton]);
   
     
   return (
@@ -51,26 +51,24 @@ export default function Component () {
                   <Box sx={{width:'100%', height: '100%'}}>
                       { 
                           loggedUser?.friends?.map((friend,i) => (
-                            <Box>
+                            <Box key={`key-${i}`}>
                               <Box
-                                key={'mobileVersion-key-'+i} 
                                 sx={{display: {xs:'flex', lg: 'none'}, padding: '10px', width: '100%', gap:'5px', alignItems: 'center', cursor: 'pointer', '&:hover': {backgroundColor: '#E7E1D9'}, backgroundColor: `${friend._id === selectedFriend ? '#E7E1D9' : ''}`}} 
                                 onClick={() => ChooseFriendMobile(friend)}
                                 >
                                 <Box>
-                                  <img src={friend.picture} style={{height:'3rem', width:'3rem', borderRadius: '50%'}}/>
+                                  <img src={friend.picture} alt="friend display picture" style={{height:'3rem', width:'3rem', borderRadius: '50%'}}/>
                                 </Box>
                                 <Box>
                                   <h3>{friend.firstName} {friend.lastName}</h3>
                                 </Box>
                               </Box>
                               <Box
-                                key={'desktopVersion-'+i} 
                                 sx={{padding: '10px', width: '100%', display: {xs:'none', lg: 'flex'}, gap:'5px', alignItems: 'center', cursor: 'pointer', '&:hover': {backgroundColor: '#E7E1D9'}, backgroundColor: `${friend._id === selectedFriend ? '#E7E1D9' : ''}`}} 
                                 onClick={() => ChooseFriend(friend)}
                                 >
                                 <Box>
-                                  <img src={friend.picture} style={{height:'3rem', width:'3rem', borderRadius: '50%'}}/>
+                                  <img src={friend.picture} alt="friend display picture" style={{height:'3rem', width:'3rem', borderRadius: '50%'}}/>
                                 </Box>
                                 <Box>
                                   <h3>{friend.firstName} {friend.lastName}</h3>

@@ -13,16 +13,10 @@ import Spinner from "../components/Spinner"
 export default function Component() {
    
     const[searchByQuery, setSearchByQuery] = React.useState('');
-    const {currentId, setCurrentId, scrollToTopButton, setScrollToTopButton} = React.useContext(GlobalVariablesContext)
-    
-    const dispatch = useDispatch();
-    const location = useLocation();
-    const params = new URLSearchParams(window.location.search);
-    
+    const { setCurrentId, scrollToTopButton, setScrollToTopButton} = React.useContext(GlobalVariablesContext)
+        
     const { isLoading } = useSelector(state => state.posts)
-    
-    const page = queryString.parse(location.search).page || 1;    
-    
+        
     const [createMemoryForm, setCreateMemoryForm] = React.useState(false);
 
     React.useEffect(() => {

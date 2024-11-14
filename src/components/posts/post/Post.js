@@ -11,11 +11,22 @@ import Grid2 from "@mui/material/Unstable_Grid2";
 
 const Post = ({post, setCurrentId, setCreateMemoryForm, page}) => {
   const dispatch = useDispatch();
-  let user;
+
+  const [user, setUser] = useState(null)
+  
+  useEffect(()=>{
+    let localStorageUser = JSON.parse(localStorage.getItem('user'));
+    setUser(localStorageUser);
+  },[])
 
   useEffect(()=>{
-    user = JSON.parse(localStorage.getItem('user'));
-  },[])
+    if(user?.result._id) setCardActionsState(true);
+    if(post?.likes?.indexOf(user?.result?._id || user?.result?.googleId) === -1){
+        setLikeMsg('Like');
+    }else{
+        setLikeMsg('Unlike');
+    }
+  },[user, post])
 
   const [confirmDeleteModal, setConfirmDeleteModal] = useState(false);
   const [cardActionsState, setCardActionsState] = useState(false);
@@ -44,18 +55,10 @@ const Post = ({post, setCurrentId, setCreateMemoryForm, page}) => {
     setConfirmDeleteModal(true); 
   }
 
-  useEffect(()=>{
-    let user = JSON.parse(localStorage.getItem('user'));
-    if(user?.result._id) setCardActionsState(true);
-    if(post?.likes?.indexOf(user?.result?._id || user?.result?.googleId) === -1){
-        setLikeMsg('Like');
-    }else{
-        setLikeMsg('Unlike');
-    }
-  },[post])
+
 
   return (
-        <Grid2 item size={3} onClick={openPost} sx={{ borderRadius: '15px', position: 'relative', cursor: 'pointer', height: '20rem', width: '15rem'}} >
+        <Grid2 size={3} onClick={openPost} sx={{ borderRadius: '15px', position: 'relative', cursor: 'pointer', height: '20rem', width: '15rem'}} >
           <Card sx={{height: '100%', width: '100%'}}>
           {
             confirmDeleteModal ? (
