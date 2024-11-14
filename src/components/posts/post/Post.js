@@ -15,7 +15,6 @@ const Post = ({post, setCurrentId, setCreateMemoryForm, page}) => {
   const [user, setUser] = useState(null)
   
   useEffect(()=>{
-    console.log('logging')
     let localStorageUser = JSON.parse(localStorage.getItem('user'));
     setUser(localStorageUser);
     if(localStorageUser?.result._id) setCardActionsState(true);
