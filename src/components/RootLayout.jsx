@@ -10,6 +10,7 @@ import thunk from 'redux-thunk'
 import { LocationProvider } from '@reach/router'
 import { GlobalVariablesProvider } from '../context/globalVariables'
 import { Container, ThemeProvider, createTheme } from '@mui/material'
+import { Helmet } from 'react-helmet'
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
 // const store = configureStore({

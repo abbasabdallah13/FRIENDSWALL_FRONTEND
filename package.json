@@ -25,6 +25,7 @@
     "bcryptjs": "^2.4.3",
     "gatsby": "^5.12.4",
     "gatsby-plugin-manifest": "^5.14.0",
+    "gatsby-plugin-react-helmet": "^6.14.0",
     "jwt-decode": "^3.1.2",
     "ngrok": "^5.0.0-beta.2",
     "query-string": "^8.1.0",
@@ -32,6 +33,7 @@
     "react-country-flag": "^3.1.0",
     "react-dom": "^18.2.0",
     "react-file-base64": "^1.0.3",
+    "react-helmet": "^6.1.0",
     "react-redux": "^8.1.2",
     "redux": "^4.2.1",
     "redux-thunk": "^2.3.0"

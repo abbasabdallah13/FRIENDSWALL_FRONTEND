@@ -8,6 +8,7 @@ import Details from "../../components/Details.jsx";
 import GlobalVariablesContext from "../../context/globalVariables.js";
 import PostOptions from "../../components/posts/post/PostOptions.jsx";
 import Spinner from "../../components/Spinner.jsx";
+import { Helmet } from "react-helmet";
 
 
 export default function Component() {
@@ -77,20 +78,29 @@ export default function Component() {
   useOutsideClicker(anywhereClick);
 
   return (
-      isLoading ? 
-        <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%'}}>
-          <Spinner />
-        </Box>
-      : (
-          <Paper sx={{position:'relative', padding: '20px', borderRadius: '15px', width:'100%', height: deletePostModal || editPostModal ? '100vh' : '', overflow: deletePostModal || editPostModal ? 'hidden' : ''}} elevation={6}>
-            {
-              scrollToTopButton && (
-                  <ScrollToTop />
-              )
-            }
-            <PostOptions postCreator={postCreator} postModal={postModal} setPostModal={setPostModal} editPostModal={editPostModal} setEditPostModal={setEditPostModal} deletePostModal={deletePostModal} setDeletePostModal={setDeletePostModal} anywhereClick={anywhereClick} currentId={currentId} setCurrentId={setCurrentId} id={id} />          
-            <Details postCreator={postCreator} id={id} user={user} post={post} deletePostFunc={deletePostFunc} />
-          </Paper>
-        )
+    <>
+    <Helmet>
+      <title>FriendsWall - Post </title>
+    </Helmet>
+    <main>
+      {
+        isLoading ? 
+          <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%'}}>
+            <Spinner />
+          </Box>
+        : (
+            <Paper sx={{position:'relative', padding: '20px', borderRadius: '15px', width:'100%', height: deletePostModal || editPostModal ? '100vh' : '', overflow: deletePostModal || editPostModal ? 'hidden' : ''}} elevation={6}>
+              {
+                scrollToTopButton && (
+                    <ScrollToTop />
+                )
+              }
+              <PostOptions postCreator={postCreator} postModal={postModal} setPostModal={setPostModal} editPostModal={editPostModal} setEditPostModal={setEditPostModal} deletePostModal={deletePostModal} setDeletePostModal={setDeletePostModal} anywhereClick={anywhereClick} currentId={currentId} setCurrentId={setCurrentId} id={id} />          
+              <Details postCreator={postCreator} id={id} user={user} post={post} deletePostFunc={deletePostFunc} />
+            </Paper>
+          )
+      }
+    </main>
+    </>
   )
 };
