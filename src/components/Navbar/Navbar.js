@@ -38,7 +38,6 @@ const Navbar = () => {
             if (refsArr[0].current && !refsArr[0].current.contains(event.target) && !refsArr[1].current.contains(event.target)) {
                     setOpenNavbarModal(false)
                     setFriendRequestModal(false)
-                    setFriendRequestModal(false)
             }
           }
           document.addEventListener("mousedown", handleClickOutside);
@@ -47,7 +46,8 @@ const Navbar = () => {
           };
         }, [refsArr]);
       }
-      useOutsideAlerter([navbarModalRef, userClickRef]);    
+      useOutsideAlerter([navbarModalRef, userClickRef]);  
+      
     
     useEffect(() => {
 
@@ -133,7 +133,7 @@ const Navbar = () => {
                     </Box>
                     <Box 
                         sx={{width: '100%', cursor: 'pointer', display:'flex', alignItems:'center', justifyContent:'end'}} 
-                        onClick={() => {setOpenNavbarModal((state) => !state)}}
+                        onClick={() => {setOpenNavbarModal((state) => !state); setFriendRequestModal(false)}}
                         ref={userClickRef}
                     >
                         <img src={user?.picture} className='navbar-user-pic' alt={user?.name} />
