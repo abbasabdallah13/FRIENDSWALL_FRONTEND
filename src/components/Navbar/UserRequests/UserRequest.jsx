@@ -17,7 +17,7 @@ const UserRequest = ({requestor, last}) => {
     }
 
   return (
-    <Box sx={{marginTop:'0rem', display:'flex', gap:'0.5rem', borderBottom: !last?'1px solid #e8e8e8':'0', padding:'0.5rem'}}>
+    <Box sx={{marginTop:'0rem', display:'flex', gap:'0.5rem', borderBottom: !last?'1px solid #e8e8e8':'0', padding:'0.5rem', zIndex: '900'}}>
         <Box sx={{padding:'0.3rem', display:'flex', alignItems:'center'}}>
             <img src={requestor.picture} style={{borderRadius:'50%', width:'4rem', height:'4rem'}} />
         </Box>

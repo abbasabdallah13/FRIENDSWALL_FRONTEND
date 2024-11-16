@@ -128,7 +128,7 @@ export default function Component() {
               </Box> ) : (
             <Box className='oneStar'>
               {/* 1 */}
-              <Box className="one"> 
+              <Box className="one" sx={{display: {xs: 'none', lg: 'flex'}}}> 
                   {/* 2 */}
                   <Banner user={user} userInfo={userInfo} addFriendBtn={false} className={'two user-banner-component'} />
                   {/* 3 */}

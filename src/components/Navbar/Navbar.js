@@ -38,6 +38,7 @@ const Navbar = () => {
             if (refsArr[0].current && !refsArr[0].current.contains(event.target) && !refsArr[1].current.contains(event.target)) {
                     setOpenNavbarModal(false)
                     setFriendRequestModal(false)
+                    setFriendRequestModal(false)
             }
           }
           document.addEventListener("mousedown", handleClickOutside);
