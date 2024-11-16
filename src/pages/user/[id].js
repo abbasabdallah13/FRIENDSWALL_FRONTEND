@@ -128,9 +128,11 @@ export default function Component() {
               </Box> ) : (
             <Box className='oneStar'>
               {/* 1 */}
-              <Box className="one" sx={{display: {xs: 'none', lg: 'flex'}}}> 
+              <Box className="one"> 
                   {/* 2 */}
-                  <Banner user={user} userInfo={userInfo} addFriendBtn={false} className={'two user-banner-component'} />
+                  <Box sx={{display: {xs: 'none', lg: 'flex'}}}>
+                    <Banner user={user} userInfo={userInfo} addFriendBtn={false} className={'two user-banner-component'} />
+                  </Box>
                   {/* 3 */}
                   <Box className='three'>
                     {/* 4 */}
