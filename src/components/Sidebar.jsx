@@ -13,7 +13,7 @@ import GlobalVariablesContext from '../context/globalVariables';
 import { userSearchAction } from '../actions/users';
 import Form from './Form';
 
-function Sidebar({setSearchByQuery, setCreateMemoryForm, createMemoryForm}) {
+function Sidebar({setCreateMemoryForm, createMemoryForm}) {
     const dispatch = useDispatch();
     const location = useLocation();
 
@@ -28,10 +28,9 @@ function Sidebar({setSearchByQuery, setCreateMemoryForm, createMemoryForm}) {
     const [showPaginate, setShowPaginate] = React.useState(true);
     const [pageNumber, setPageNumber] = React.useState(1)
 
-    const { currentId, setCurrentId } = React.useContext(GlobalVariablesContext)
+    const { setSearchByQuery, currentId, setCurrentId } = React.useContext(GlobalVariablesContext)
   
   const search = () => {
-      setOpenSearch(false)
       setShowPaginate(false)
       if(userSearchArray.length > 0){
         dispatch(userSearchAction({userSearch: userSearchArray.join(',')}))
@@ -46,10 +45,10 @@ function Sidebar({setSearchByQuery, setCreateMemoryForm, createMemoryForm}) {
       setUserSearch('');
       setPostSearch('');
       setTags([])
-      setOpenSearch(false)
       dispatch(getPostsPerPage(page))
       navigate('/')
       setShowPaginate(true)
+      setSearchByQuery('')
     }  
   
     const userSearchTrim = (e) => {

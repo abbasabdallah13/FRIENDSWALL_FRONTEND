@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { navigate, useLocation } from '@reach/router'
 import decode from 'jwt-decode';
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,7 @@ import { getUserInfoByEmail } from "../../actions/users";
 import UserRequest from "./UserRequests/UserRequest";
 import memories from '../../assets/memories.png'
 import './index.css'
+import GlobalVariablesContext from "../../context/globalVariables";
 
  
 const Navbar = () => {
@@ -24,6 +25,7 @@ const Navbar = () => {
     const userClickRef = useRef(null)
 
     const user = useSelector(state => state.user.loggedUser);
+    const { setSearchByQuery } = useContext(GlobalVariablesContext)
 
     const [friendRequestModal, setFriendRequestModal] = useState(false);
     const [openNavbarModal, setOpenNavbarModal] = useState(false);
@@ -94,6 +96,7 @@ const Navbar = () => {
 
     const navigateHome = ()=> { 
         navigate('/');
+        setSearchByQuery('')
     }
     
   return (

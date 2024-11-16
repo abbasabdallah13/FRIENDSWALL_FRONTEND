@@ -2,13 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactCountryFlag from "react-country-flag"
 import { Button, Divider, Zoom } from "@mui/material"
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz"
 import PersonAdd from '@mui/icons-material/PersonAdd'
 import { addFriendAction, unfriendAction, unsendFriendRequest } from "../../../actions/users";
 import { getCountryFlag } from "../../../utils/utils";
 
-const Banner = ({user, userInfo, addFriendBtn, component, setBannerOrFriends,style, className}) => {
+const Banner = ({user, userInfo, addFriendBtn, style, className}) => {
     const loggedUser = useSelector(state => state.user.loggedUser);
     const [localStorageUser, setLocalStorageUser] = useState(null)
 
@@ -54,7 +52,6 @@ const Banner = ({user, userInfo, addFriendBtn, component, setBannerOrFriends,sty
 
     const unfriendUser = () => {
       dispatch(unfriendAction(user?._id, loggedUser?._id));
-      setBannerOrFriends('friends')
     }
 
     function useOutsideClicker(ref) {
@@ -75,22 +72,7 @@ const Banner = ({user, userInfo, addFriendBtn, component, setBannerOrFriends,sty
     
   return (
     <Zoom in >
-      <div style={{position:'relative', width: style?.width, height: style?.height}}  className={className} >
-        {
-          (component === 'friends'&& user._id !== loggedUser._id) && (
-            <div style={{display:'flex', justifyContent:'space-between', position:'relative'}}>
-              <ArrowBackIcon style={{cursor:'pointer'}}  onClick={()=>setBannerOrFriends('friends')} />
-              <MoreHorizIcon style={{cursor:'pointer'}}  onClick={()=>setBannerModal(true)} />
-              {
-                bannerModal && (
-                  <div ref={anywhereClick} style={{position:'absolute', right:'0', top:'1rem', backgroundColor:'#e8e8e8', padding:'0'}}>
-                    <Button onClick={()=>{setBannerModal(false);setUnfriendModal(true)}}>Unfriend {user?.firstName}</Button>
-                  </div>
-                )
-              }
-            </div>
-          )
-        }
+      <div style={{position:'relative', width: style?.width, height: style?.height, display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}  className={className} >
         {
           unfriendModal && (
             <div style={{position:'absolute', top:'0',left:'0', width:'100%', height:'100%', backgroundColor:'rgb(255,255,255,0.95)', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', zIndex:'88'}}>
@@ -102,7 +84,7 @@ const Banner = ({user, userInfo, addFriendBtn, component, setBannerOrFriends,sty
             </div>
           )
         }
-        <div style={{ display:'flex', flexDirection:'column',alignItems:'center'}}>
+        <div style={{ display:'flex', flexDirection:'column', alignItems:'center'}}>
           <img style={{width:'10rem', height:'10rem', borderRadius:'50%'}}  src={userInfo?.picture || user?.picture} alt='profile pic' />
           <h3 className='banner-name'>{userInfo?.firstName || user?.firstName} {userInfo?.lastName || user?.lastName}</h3>
           <p className='bio'>{userInfo?.bio || user?.bio}</p>
@@ -120,7 +102,7 @@ const Banner = ({user, userInfo, addFriendBtn, component, setBannerOrFriends,sty
           <Divider style={{position:'relative', bottom:"1.5rem"}} />
           <p style={{color:'#8A8A8A', position:'relative', bottom:"1.5rem"}}>Friends</p>
           <p style={{position:'relative', bottom:"1.5rem"}}>{user?.friends?.length}</p>
-      </div>
+       </div>
       {
         addFriendBtn && (
           <div style={{display:'flex', justifyContent: 'end', alignItems: 'center',borderRadius: '8px', padding: '0.3rem'}}>

@@ -11,8 +11,7 @@ import { Helmet } from "react-helmet";
 
 export default function Component() {
    
-    const[searchByQuery, setSearchByQuery] = React.useState('');
-    const { setCurrentId, scrollToTopButton, setScrollToTopButton} = React.useContext(GlobalVariablesContext)
+    const { searchByQuery, setSearchByQuery, setCurrentId, scrollToTopButton, setScrollToTopButton} = React.useContext(GlobalVariablesContext)
         
     const { isLoading } = useSelector(state => state.posts)
         
@@ -62,7 +61,7 @@ export default function Component() {
                     )
                   }
                   <Grid item xs={12} sm={12} md={3}>
-                    <Sidebar setSearchByQuery={setSearchByQuery} setCreateMemoryForm={setCreateMemoryForm} createMemoryForm={createMemoryForm} />
+                    <Sidebar setCreateMemoryForm={setCreateMemoryForm} createMemoryForm={createMemoryForm} />
                   </Grid>
                 </Grid>
         </Grow>
